@@ -9,11 +9,17 @@
 		exit();
 	}
 	else{
+<<<<<<< HEAD
 		
 		echo "<script>
 	       alert('Data berhasil di hapus');
 	       window.location.href='../denom_kertas.php';
 	       </script>";
+=======
+		// echo base_url('denom_kertas.php');
+		print_r('berhasil');
+		// echo "<script>window.location = 'denom_kertas.php'</script>";
+>>>>>>> origin/master
 	}
 
 ?>
