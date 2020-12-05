@@ -1,38 +1,8 @@
 <?php 
-	
 	session_start();
-	include 'koneksi.php';
-
-	if ($_POST) {
-
-		date_default_timezone_set("Asia/Bangkok");
-		$result = $mysqli->query("UPDATE denom_kertas SET id_denom_kertas='".$_POST['id_denom_kertas']."', rp1='".$_POST['rp1']."', rp2='".$_POST['rp2']."', rp3='".$_POST['rp3']."', rp4='".$_POST['rp4']."', rp5='".$_POST['rp5']."', rp6='".$_POST['rp6']."', updated_at='".date('Y-m-d H:s:i')."' WHERE id_denom_kertas=".$_POST['id_denom_kertas']);
-
-		if(!$result){
-			echo $mysqli->connect_errno." - ".$mysqli->connect_error;
-			exit();
-
-		}else{
-
-			echo "<script>
-           alert('Data berhasil di update');
-           window.location.href='denom_kertas.php';
-           </script>";
-		}
-
-	}else{
-
-		$result = $mysqli->query("SELECT * FROM `denom_kertas` WHERE `id_denom_kertas` = ".$_GET['id_denom_kertas']."");
-
-		if($result->num_rows > 0){
-           $data = mysqli_fetch_object($result);
-        }else{
-           echo "data tidak tersedia";
-           die();
-        }
-
+	if($_SESSION['login']!='login') header('Location: login.php');
+	include 'koneksi.php'; 	// include = menambahkan/mengikutkan file, setting koneksi ke database
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -51,10 +21,10 @@
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
-  
-  <!-- DATA TABLES -->
+	
+	<!-- DATA TABLES -->
     <link href="css/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-  <link href="css/dataTables.tableTools.min.css" rel="stylesheet" type="text/css" />
+	<link href="css/dataTables.tableTools.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -94,55 +64,62 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-          <?php if($_SESSION['level']=='admin'){?>
-             
-            <li class="active"><a href="">Master Data Denom</a></li>
-            <li><a href="">Keuangan</a></li>
-            <?php } ?>
-          </ul>
+            <li class="active"><a href="#">User <span class="sr-only">(current)</span></a></li>
+            <li><a href="pegawai.php">Pegawai</a></li>
+            <li><a href="divisi.php">Divisi</a></li>
+            </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Edit Denom Kertas</h1>
-          <div class="row">
-            <div class="col-lg-12">
-                <!-- <button class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#exampleModal" style="font-weight: bold;">Tambah</button> -->
-            </div> 
-          </div>
-            <form action="" method="POST">
-	          <div class="row">
-	            <div class="col-lg-12">
-	              	<div class="form-group">
-	              		<input class="form-control" type="hidden" name="id_denom_kertas" value="<?= $data->id_denom_kertas ?>">
-	              		<label>Rp 1</label>
-	              		<input class="form-control" type="number" name="rp1" value="<?= $data->rp1 ?>">
-	              	</div>
-                  <div class="form-group">
-                    <label>Rp 2</label>
-                    <input class="form-control" type="number" name="rp2" value="<?= $data->rp2 ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Rp 3</label>
-                    <input class="form-control" type="number" name="rp3" value="<?= $data->rp3 ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Rp 4</label>
-                    <input class="form-control" type="number" name="rp4" value="<?= $data->rp4 ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Rp 5</label>
-                    <input class="form-control" type="number" name="rp5" value="<?= $data->rp5 ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Rp 6</label>
-                    <input class="form-control" type="number" name="rp6" value="<?= $data->rp6 ?>">
-                  </div>
-	              	<div class="float-right">
-	              		<button class="btn btn-sm btn-success">Update</button>
-	              	</div>
-	            </div>
-            </form>
-          </div>
-          <br>
+          <h1 class="page-header">Dashboard Admin</h1>
+		  <div class="row">
+		  <div class="col-md-6">
+		  <div>
+					<?php 
+						$result = $mysqli->query("SELECT *  FROM `user` WHERE `id_user` = ".$_GET['id'].";"); 
+						if($result->num_rows > 0){
+							// echo "User ada";
+							$no = 1;
+							while($row = $result->fetch_assoc()) {
+					?>
+			<form class="form-horizontal" action="proses_update_user.php?id=<?php echo $_GET['id'];?>" method="POST">
+			  <div class="form-group">
+				<label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+				<div class="col-sm-10">
+				  <input type="text" class="form-control" name="username" id="inputEmail3" placeholder="Masukkan Username untuk User baru" value="<?php echo $row['user'];?>" required />
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+				<div class="col-sm-10">
+				  <input type="text" class="form-control" name="password" id="inputPassword3" placeholder="Masukkan Password untuk User baru" value="<?php echo $row['pass'];?>" required />
+				</div>
+			  </div>
+			  <div class="form-group">
+				  <label for="level" class="col-sm-2 control-label">Level</label>
+				  <div class="col-sm-10">
+				  <select name="level" id="disabledSelect" class="form-control">
+					<option value="user" <?php if($row['level']=='user') echo "selected";?>>User</option>
+					<option value="admin" <?php if($row['level']=='admin') echo "selected";?>>Admin</option>
+				  </select>
+				  </div>
+			  </div>
+			  <div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+				  <button type="reset" class="btn btn-danger">Reset</button>
+				  <a type="cancel" class="btn btn-warning" href="user.php">Cancel</a>
+				  <button type="submit" class="btn btn-primary">Update Data</button>
+				</div>
+			  </div>
+			</form>
+					<?php
+							}
+						}
+					?>
+		  </div>
+		  </div>
+		  <div class="col-md-6">
+		  </div>
+		  </div><!-- row -->
          </div>
         </div>
       </div>
@@ -153,15 +130,15 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-  <!-- DATA TABES SCRIPT -->
+	<!-- DATA TABES SCRIPT -->
     <script src="js/jquery.dataTables.js" type="text/javascript"></script>
     <script src="js/dataTables.bootstrap.js" type="text/javascript"></script>
-    <script src="js/dataTables.tableTools.min.js" type="text/javascript"></script>
+	<script src="js/dataTables.tableTools.min.js" type="text/javascript"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <script src="js/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  <!-- page script -->
+	<!-- page script -->
     <script type="text/javascript">
       $(function () {
         $("#example1").dataTable();
@@ -177,6 +154,3 @@
     </script>
   </body>
 </html>
-<?php
-}
-?>

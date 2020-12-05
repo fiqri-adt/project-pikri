@@ -1,4 +1,14 @@
-<?php session_start(); ?>
+<?php session_start();
+if(isset($_SESSION['level'])){
+    if($_SESSION['level'] == 'karyawan'){
+		header('Location: dashboard_karyawan.php');
+	}elseif($_SESSION['level'] == 'asmen'){
+		header('Location: dashboard_u.php');
+	} else {
+		header('Location: login.php');
+    }
+} 
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

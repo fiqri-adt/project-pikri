@@ -4,9 +4,9 @@
 	include 'koneksi.php';
 
 	if ($_POST) {
-
+    
 		date_default_timezone_set("Asia/Bangkok");
-		$result = $mysqli->query("UPDATE denom_kertas SET id_denom_kertas='".$_POST['id_denom_kertas']."', rp1='".$_POST['rp1']."', rp2='".$_POST['rp2']."', rp3='".$_POST['rp3']."', rp4='".$_POST['rp4']."', rp5='".$_POST['rp5']."', rp6='".$_POST['rp6']."', updated_at='".date('Y-m-d H:s:i')."' WHERE id_denom_kertas=".$_POST['id_denom_kertas']);
+		$result = $mysqli->query("UPDATE denom_koin SET id_denom_koin='".$_POST['id_denom_koin']."', rp1='".$_POST['rp1']."', rp2='".$_POST['rp2']."', rp3='".$_POST['rp3']."', rp4='".$_POST['rp4']."', rp5='".$_POST['rp5']."', rp6='".$_POST['rp6']."', updated_at='".date('Y-m-d H:s:i')."' WHERE id_denom_koin=".$_POST['id_denom_koin']);
 
 		if(!$result){
 			echo $mysqli->connect_errno." - ".$mysqli->connect_error;
@@ -22,7 +22,7 @@
 
 	}else{
 
-		$result = $mysqli->query("SELECT * FROM `denom_kertas` WHERE `id_denom_kertas` = ".$_GET['id_denom_kertas']."");
+		$result = $mysqli->query("SELECT * FROM `denom_koin` WHERE `id_denom_koin` = ".$_GET['id_denom_koin']."");
 
 		if($result->num_rows > 0){
            $data = mysqli_fetch_object($result);
@@ -102,7 +102,7 @@
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Edit Denom Kertas</h1>
+          <h1 class="page-header">Edit Denom Koin</h1>
           <div class="row">
             <div class="col-lg-12">
                 <!-- <button class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#exampleModal" style="font-weight: bold;">Tambah</button> -->
@@ -112,7 +112,7 @@
 	          <div class="row">
 	            <div class="col-lg-12">
 	              	<div class="form-group">
-	              		<input class="form-control" type="hidden" name="id_denom_kertas" value="<?= $data->id_denom_kertas ?>">
+	              		<input class="form-control" type="hidden" name="id_denom_koin" value="<?= $data->id_denom_koin ?>">
 	              		<label>Rp 1</label>
 	              		<input class="form-control" type="number" name="rp1" value="<?= $data->rp1 ?>">
 	              	</div>

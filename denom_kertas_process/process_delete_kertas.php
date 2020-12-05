@@ -9,9 +9,11 @@
 		exit();
 	}
 	else{
-		// echo base_url('denom_kertas.php');
-		print_r('berhasil');
-		// echo "<script>window.location = 'denom_kertas.php'</script>";
+		// print_r($_GET); die();
+		echo "<script>
+       alert('Data berhasil di hapus');
+       window.location.href='../denom_kertas.php';
+       </script>";
 	}
 
 ?>

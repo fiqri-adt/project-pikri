@@ -1,5 +1,5 @@
 <?php 
-    include 'koneksi.php';  // include = menambahkan/mengikutkan file, setting koneksi ke database
+    include 'koneksi.php';   // include = menambahkan/mengikutkan file, setting koneksi ke database
     session_start();
     if($_SESSION['login'] !== 'login') header('Location: login.php');
     ?>
@@ -40,7 +40,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Asisten Manager</a>
+                <a class="navbar-brand" href="#">Karyawan</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -54,7 +54,7 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <?php if($_SESSION['level']=='asmen'){?>
+                    <?php if($_SESSION['level']=='karyawan'){?>
                     <li class="active"><a href="">Master Data Denom</a></li>
                     <?php } ?>
                 </ul>
@@ -63,8 +63,13 @@
                 <h2 class="page-header">Dashboard <?php echo ucfirst($_SESSION['level']);?></h2>
                 <div class="row">
                     <div class="col-lg-12">
+                        <button class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#exampleModal" style="font-weight: bold;">Tambah</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
                         <div id="exTab1">
-                            <ul  class="nav nav-pills">
+                            <ul class="nav nav-pills">
                                 <li class="active">
                                     <a href="#1a" data-toggle="tab">Denom Kertas</a>
                                 </li>
@@ -72,6 +77,7 @@
                                     <a href="#2a" data-toggle="tab">Denom Koin</a>
                                 </li>
                             </ul>
+                            <br/>
                             <div class="tab-content clearfix">
                                 <div class="tab-pane active table-responsive" id="1a">
                                     <table id="denomKertas" class="table table-bordered table-striped dataTable">
@@ -121,6 +127,7 @@
                                                         <input class="form-control" name="id_denom_kertas" type="hidden" value="<?= $row['id_denom_kertas']?>"> 
                                                         <button class="btn btn-sm btn-danger">Delete</button>
                                                         </form> -->
+                                                    <a class="btn btn-sm btn-danger" href="denom_kertas_process/process_delete_kertas.php?id_denom_kertas=<?= $row['id_denom_kertas']?>">Delete</a>
                                                     <a class="btn btn-sm btn-warning" href="edit_denom_kertas.php?id_denom_kertas=<?= $row['id_denom_kertas']?>">Edit</a>
                                                 </td>
                                             </tr>
@@ -237,6 +244,7 @@
                                                 ?>
                                                 </td>
                                                 <td>
+                                                    <a class="btn btn-sm btn-danger" href="denom_kertas_process/process_delete_kertas.php?id_denom_kertas=<?= $row['id_denom_kertas']?>">Delete</a>
                                                     <a class="btn btn-sm btn-warning" href="edit_denom_koin.php?id_denom_koin=<?= $row['id_denom_koin']?>">Edit</a>
                                                 </td>
                                             </tr>
@@ -316,7 +324,6 @@
                 <br>
             </div>
         </div>
-    </div>
     </div>
     <!-- Modal Add -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -416,6 +423,8 @@
               alert('true')
              return true;
            }
+    </script>
+    <script type="text/javascript">
         $(document).on('click', '#id_denom', function() {
           var id_denom_kertas = $(this).data('id_denom_kertas');
           var denom_kertas = $(this).data('denom_kertas');
@@ -458,6 +467,6 @@
           var dataType = 'JSON';
         
         })
-   </script>
+        </script>
 </body>
 </html>
