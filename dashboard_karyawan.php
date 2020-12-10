@@ -63,7 +63,16 @@
                 <h2 class="page-header">Dashboard <?php echo ucfirst($_SESSION['level']);?></h2>
                 <div class="row">
                     <div class="col-lg-12">
-                        <button class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#exampleModal" style="font-weight: bold;">Tambah</button>
+                        <div class="button">
+                            <button class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#modalKertas" style="font-weight: bold;">Tambah Denom Kertas</button>
+                        </div>
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="button">
+                            <button class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#modalKoin" style="font-weight: bold;">Tambah Denom Koin</button>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -326,17 +335,79 @@
         </div>
     </div>
     <!-- Modal Add -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalKertas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Denom Kertas</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <form action="denom_kertas_process/process_denom_kertas.php" method="POST">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Denom</label>
+                                    <input type="number" name="denom_kertas" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Rp1</label>
+                                    <input type="number" name="rp1" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Rp3</label>
+                                    <input type="number" name="rp3" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Rp5</label>
+                                    <input type="number" name="rp5" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Inpak</label>
+                                    <input type="number" name="inpak" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Rp2</label>
+                                    <input type="number" name="rp2" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Rp4</label>
+                                    <input type="number" name="rp4" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Rp6</label>
+                                    <input type="number" name="rp6" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Modal Add -->
+    <div class="modal fade" id="modalKoin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Denom Koin</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="denom_koin_process/process_add_koin.php" method="POST">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
