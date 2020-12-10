@@ -19,55 +19,61 @@ if(isset($_SESSION['level'])){
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
-
-    <title>Signin Template for Bootstrap</title>
-
+    <title>Login Page</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="css/signin.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
 
   <body>
 
     <div class="container">
-
-      <form class="form-signin" action="cek_login.php" method="post">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text" name="username" id="username" class="form-control" placeholder="Username" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="img" style="margin-top: 100px;">
+            <img src="./img/login.svg" style="width: auto; height: 370px;">
+          </div>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-		<br>
-		<?php 
-		if(@$_SESSION['msg']==1){
-			echo '<div class="alert alert-info" role="alert">Maaf Username atau Password yang kamu masukkan salah.</div>';
-			$_SESSION['msg'] = 0;
-		}
-		?>
-      </form>
-	  
+        <div class="col-lg-6" style="margin-top: 60px;">
+          <h2 class="text-center" style="font-weight: 600;">LOGIN FORM</h2><br>
+          <form class="form-signin" action="cek_login.php" method="post">
+            <label>Email address</label>
+            <input type="text" name="username" id="username" class="form-control" placeholder="Username" required autofocus><br>
+            <label>Password</label>
+            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="remember-me"> Remember me
+              </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" style="background-color: #6C63FF" type="submit">Masuk</button>
+            <br>
+          </form>
+        </div>
+      </div>
     </div> <!-- /container -->
-
-
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- Bootraps Min JS -->
+    <script src="./js/bootstrap.min.js"></script>
+    <!-- Jquery -->
+    <script src="./js/jquery.min.js"></script>
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <?php 
+    if(@$_SESSION['msg']==1){
+      echo '<script>
+      $(document).ready(function() {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Username & Password Salah !",
+        })
+      })
+      </script>';
+      $_SESSION['msg'] = 0;
+    }
+    ?>
   </body>
 </html>

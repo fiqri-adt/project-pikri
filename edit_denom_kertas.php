@@ -52,19 +52,10 @@
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
   
-  <!-- DATA TABLES -->
+    <!-- DATA TABLES -->
     <link href="css/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-  <link href="css/dataTables.tableTools.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/dataTables.tableTools.min.css" rel="stylesheet" type="text/css" />
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
 
   <body>
@@ -89,33 +80,22 @@
         </div>
       </div>
     </nav>
-
-    <div class="container-fluid">
+    <br>
+    <div class="container">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-          <?php if($_SESSION['level']=='admin'){?>
-             
-            <li class="active"><a href="">Master Data Denom</a></li>
-            <li><a href="">Keuangan</a></li>
-            <?php } ?>
-          </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Edit Denom Kertas</h1>
+        <div class="col-sm-12 col-md-12">
+          <!-- <h1 class="page-header text-center">Dashboard Edit Denom Kertas</h1> -->
+          <div class="jumbotron">
+            <h2 class="text-center" style="font-family: raleway sans-serif; font-weight: 600;">Dashboard Edit Denom Kertas</h2>
+          </div>
           <div class="row">
             <div class="col-lg-12">
-                <!-- <button class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#exampleModal" style="font-weight: bold;">Tambah</button> -->
-            </div> 
-          </div>
-            <form action="" method="POST">
-	          <div class="row">
-	            <div class="col-lg-12">
-	              	<div class="form-group">
-	              		<input class="form-control" type="hidden" name="id_denom_kertas" value="<?= $data->id_denom_kertas ?>">
-	              		<label>Rp 1</label>
-	              		<input class="form-control" type="number" name="rp1" value="<?= $data->rp1 ?>">
-	              	</div>
+                <form action="" method="POST">
+                  <div class="form-group">
+                    <input class="form-control" type="hidden" name="id_denom_kertas" value="<?= $data->id_denom_kertas ?>">
+                    <label>Rp 1</label>
+                    <input class="form-control" type="number" name="rp1" value="<?= $data->rp1 ?>">
+                  </div>
                   <div class="form-group">
                     <label>Rp 2</label>
                     <input class="form-control" type="number" name="rp2" value="<?= $data->rp2 ?>">
@@ -136,11 +116,21 @@
                     <label>Rp 6</label>
                     <input class="form-control" type="number" name="rp6" value="<?= $data->rp6 ?>">
                   </div>
-	              	<div class="float-right">
-	              		<button class="btn btn-sm btn-success">Update</button>
-	              	</div>
-	            </div>
-            </form>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="button" style="text-align: left;">
+                        <a href="dashboard_u.php" class="btn btn-xl btn-danger">Cancel</a>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="button" style="text-align: right;">
+                        <button class="btn btn-xl btn-primary" style="background-color: #6C63FF;">Update</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+            </div> 
+          </div>
           </div>
           <br>
          </div>

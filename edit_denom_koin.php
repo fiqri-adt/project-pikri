@@ -88,63 +88,60 @@
           
         </div>
       </div>
-    </nav>
-
-    <div class="container-fluid">
+    </nav>  
+    <br>
+    <div class="container">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-          <?php if($_SESSION['level']=='admin'){?>
-             
-            <li class="active"><a href="">Master Data Denom</a></li>
-            <li><a href="">Keuangan</a></li>
-            <?php } ?>
-          </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Edit Denom Koin</h1>
+        <div class="col-sm-12 col-md-12">
+          <!-- <h1 class="page-header">Edit Denom Koin</h1> -->
+          <div class="jumbotron">
+            <h2 class="text-center" style="font-family: raleway sans-serif; font-weight: 600;">Dashboard Edit Denom Koin</h2>
+          </div>
           <div class="row">
             <div class="col-lg-12">
-                <!-- <button class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#exampleModal" style="font-weight: bold;">Tambah</button> -->
+                <form action="" method="POST">          
+                  <div class="form-group">
+                      <input class="form-control" type="hidden" name="id_denom_koin" value="<?= $data->id_denom_koin ?>">
+                      <label>Rp 1</label>
+                      <input class="form-control" type="number" name="rp1" value="<?= $data->rp1 ?>">
+                    </div>
+                    <div class="form-group">
+                      <label>Rp 2</label>
+                      <input class="form-control" type="number" name="rp2" value="<?= $data->rp2 ?>">
+                    </div>
+                    <div class="form-group">
+                      <label>Rp 3</label>
+                      <input class="form-control" type="number" name="rp3" value="<?= $data->rp3 ?>">
+                    </div>
+                    <div class="form-group">
+                      <label>Rp 4</label>
+                      <input class="form-control" type="number" name="rp4" value="<?= $data->rp4 ?>">
+                    </div>
+                    <div class="form-group">
+                      <label>Rp 5</label>
+                      <input class="form-control" type="number" name="rp5" value="<?= $data->rp5 ?>">
+                    </div>
+                    <div class="form-group">
+                      <label>Rp 6</label>
+                      <input class="form-control" type="number" name="rp6" value="<?= $data->rp6 ?>">
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="button" style="text-align: left;">
+                        <a href="dashboard_u.php" class="btn btn-xl btn-danger">Cancel</a>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="button" style="text-align: right;">
+                        <button class="btn btn-xl btn-primary" style="background-color: #6C63FF;">Update</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
             </div> 
           </div>
-            <form action="" method="POST">
-	          <div class="row">
-	            <div class="col-lg-12">
-	              	<div class="form-group">
-	              		<input class="form-control" type="hidden" name="id_denom_koin" value="<?= $data->id_denom_koin ?>">
-	              		<label>Rp 1</label>
-	              		<input class="form-control" type="number" name="rp1" value="<?= $data->rp1 ?>">
-	              	</div>
-                  <div class="form-group">
-                    <label>Rp 2</label>
-                    <input class="form-control" type="number" name="rp2" value="<?= $data->rp2 ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Rp 3</label>
-                    <input class="form-control" type="number" name="rp3" value="<?= $data->rp3 ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Rp 4</label>
-                    <input class="form-control" type="number" name="rp4" value="<?= $data->rp4 ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Rp 5</label>
-                    <input class="form-control" type="number" name="rp5" value="<?= $data->rp5 ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Rp 6</label>
-                    <input class="form-control" type="number" name="rp6" value="<?= $data->rp6 ?>">
-                  </div>
-	              	<div class="float-right">
-	              		<button class="btn btn-sm btn-success">Update</button>
-	              	</div>
-	            </div>
-            </form>
-          </div>
-          <br>
-         </div>
         </div>
+        <br>
       </div>
     </div>
 
@@ -153,7 +150,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-  <!-- DATA TABES SCRIPT -->
+    <!-- DATA TABES SCRIPT -->
     <script src="js/jquery.dataTables.js" type="text/javascript"></script>
     <script src="js/dataTables.bootstrap.js" type="text/javascript"></script>
     <script src="js/dataTables.tableTools.min.js" type="text/javascript"></script>
@@ -161,7 +158,7 @@
     <script src="js/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  <!-- page script -->
+    <!-- page script -->
     <script type="text/javascript">
       $(function () {
         $("#example1").dataTable();
