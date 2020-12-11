@@ -21,9 +21,10 @@ if(isset($_SESSION['level'])){
     <link rel="icon" href="favicon.ico">
     <title>Login Page</title>
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="css/signin.css" rel="stylesheet">
+    <link href="./css/signin.css" rel="stylesheet">
+
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
   </head>
 
