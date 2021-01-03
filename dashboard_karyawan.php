@@ -101,6 +101,7 @@
                                                 <th>RP5</th>
                                                 <th>RP6</th>
                                                 <th>Inpak</th>
+                                                <th>Tanggal</th>
                                                 <th>Total</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -122,6 +123,7 @@
                                                 <td><?= $row['rp5'] ?></td>
                                                 <td><?= $row['rp6'] ?></td>
                                                 <td><?= $row['inpak'] ?></td>
+                                                <td><?= $row['created_at'] ?></td>
                                                 <td>
                                                 <?php
                                                 $total_satu_baris = $mysqli->query("SELECT SUM(rp1)+SUM(rp2)+SUM(rp3)+SUM(rp4)+SUM(rp5)+SUM(rp6) as Total FROM denom_kertas WHERE id_denom_kertas= '".$row['id_denom_kertas']."'");
@@ -222,6 +224,7 @@
                                                 <th>RP5</th>
                                                 <th>RP6</th>
                                                 <th>Inpak</th>
+                                                <th>Tanggal</th>
                                                 <th>Total</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -243,6 +246,7 @@
                                                 <td><?= $row['rp5'] ?></td>
                                                 <td><?= $row['rp6'] ?></td>
                                                 <td><?= $row['inpak'] ?></td>
+                                                <td><?= $row['created_at'] ?></td>
                                                 <td>
                                                 <?php
                                                 $total_satu_baris = $mysqli->query("SELECT SUM(rp1)+SUM(rp2)+SUM(rp3)+SUM(rp4)+SUM(rp5)+SUM(rp6) as Total FROM denom_koin WHERE id_denom_koin= '".$row['id_denom_koin']."'");
