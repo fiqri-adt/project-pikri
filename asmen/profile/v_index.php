@@ -2,6 +2,16 @@
     include '../../koneksi.php';  // include = menambahkan/mengikutkan file, setting koneksi ke database
     session_start();
     if($_SESSION['login'] !== 'login') header('Location: login.php');
+
+    $result = $mysqli->query("SELECT * FROM `user` WHERE `id_user` = ".$_SESSION['id_user']."");
+
+    if($result->num_rows > 0){
+       $data = mysqli_fetch_object($result);
+    }else{
+       echo "data tidak tersedia";
+       die();
+    }
+
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,17 +73,17 @@
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h2 class="page-header">Dashboard <?php echo ucfirst($_SESSION['level']);?></h2>
+                <h2 class="page-header">Dashboard Profile <?= ucfirst($_SESSION['level']) ?></h2>
                 <div class="row">
                     <div class="col-lg-12">
                     <form action="func_edit_profile.php?id_user=<?= $_SESSION['id_user'] ?>" method="POST">
                       <div class="form-group">
                         <label>Username</label>
-                        <input type="text" name="user" value="<?= $_SESSION['user'] ?>">
+                        <input class="form-control" type="text" name="user" value="<?= $data->user ?>">
                       </div>
                       <div class="form-group">
                         <label>Password</label>
-                        <input type="password" name="pass" value="<?= $_SESSION['pass'] ?>">
+                        <input class="form-control" type="password" name="pass" value="<?= $data->pass ?>">
                       </div>
                       <div class="form-group">
                         <button type="submit" class="btn btn-sm btn-success">Update Profile</button>
