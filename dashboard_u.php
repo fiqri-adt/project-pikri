@@ -1,7 +1,7 @@
 <?php 
     include 'koneksi.php';  // include = menambahkan/mengikutkan file, setting koneksi ke database
     session_start();
-    if($_SESSION['login'] !== 'login') header('Location: login.php');
+    if($_SESSION['login'] != 'login' || $_SESSION['level'] != 'asmen') header('Location: login.php');
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,6 +58,7 @@
                     <li class="active"><a href="">Master Data Denom</a></li>
                     <li class=""><a href="asmen/pengeluaran/v_index.php">Pengeluaran</a></li>
                     <li class=""><a href="asmen/users/v_index.php">Management Users</a></li>
+                    <li class=""><a href="asmen/profile/v_index.php">Profile</a></li>
                     <?php } ?>
                 </ul>
             </div>
@@ -88,8 +89,8 @@
                                                 <th>RP5</th>
                                                 <th>RP6</th>
                                                 <th>Inpak</th>
-                                                <th>Tanggal</th>
                                                 <th>Total</th>
+                                                <th>Tanggal</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -110,7 +111,6 @@
                                                 <td><?= $row['rp5'] ?></td>
                                                 <td><?= $row['rp6'] ?></td>
                                                 <td><?= $row['inpak'] ?></td>
-                                                <td><?= $row['created_at'] ?></td>
                                                 <td>
                                                 <?php
                                                 $total_satu_baris = $mysqli->query("SELECT SUM(rp1)+SUM(rp2)+SUM(rp3)+SUM(rp4)+SUM(rp5)+SUM(rp6) as Total FROM denom_kertas WHERE id_denom_kertas= '".$row['id_denom_kertas']."'");
@@ -119,6 +119,7 @@
                                                     echo $value; 
                                                 }
                                                 ?>
+                                                <td><?= $row['created_at'] ?></td>
                                                 </td>
                                                 <td>
                                                     <!-- <form action="denom_kertas_process/process_delete_kertas.php" method="GET">
@@ -210,8 +211,8 @@
                                                 <th>RP5</th>
                                                 <th>RP6</th>
                                                 <th>Inpak</th>
-                                                <th>Tanggal</th>
                                                 <th>Total</th>
+                                                <th>Tanggal</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -232,7 +233,6 @@
                                                 <td><?= $row['rp5'] ?></td>
                                                 <td><?= $row['rp6'] ?></td>
                                                 <td><?= $row['inpak'] ?></td>
-                                                <td><?= $row['created_at'] ?></td>
                                                 <td>
                                                 <?php
                                                 $total_satu_baris = $mysqli->query("SELECT SUM(rp1)+SUM(rp2)+SUM(rp3)+SUM(rp4)+SUM(rp5)+SUM(rp6) as Total FROM denom_koin WHERE id_denom_koin= '".$row['id_denom_koin']."'");
@@ -242,6 +242,7 @@
                                                 }
                                                 ?>
                                                 </td>
+                                                <td><?= $row['created_at'] ?></td>
                                                 <td>
                                                     <a class="btn btn-sm btn-warning" href="edit_denom_koin.php?id_denom_koin=<?= $row['id_denom_koin']?>">Edit</a>
                                                 </td>

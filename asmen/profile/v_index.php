@@ -57,8 +57,8 @@
                     <?php if($_SESSION['level']=='asmen'){?>
                     <li class=""><a href="../../dashboard_u.php">Master Data Denom</a></li>
                     <li class=""><a href="asmen/pengeluaran/v_index.php">Pengeluaran</a></li>
-                    <li class="active"><a href="asmen/users/v_index.php">Management Users</a></li>
-                    <li class="active"><a href="asmen/profile/v_index.php">Porfile</a></li>
+                    <li class=""><a href="../users/v_index.php">Management Users</a></li>
+                    <li class="active"><a href="asmen/profile/v_index.php">Profile</a></li>
                     <?php } ?>
                 </ul>
             </div>
@@ -66,45 +66,19 @@
                 <h2 class="page-header">Dashboard <?php echo ucfirst($_SESSION['level']);?></h2>
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="jumbotron">
-                            <h2 class="text-center">Dashboard Mangement Users</h2>
-                        </div>
-                        <div style="text-align: right;">
-                            <button class="btn btn-xl btn-primary" data-toggle="modal" data-target="#exampleModal">Tambah</button>
-                        </div><br>
-                        <table id="denomKertas" class="table table-bordered table-striped dataTable">
-                            <thead>
-                                <tr role="row">
-                                    <th>NO</th>
-                                    <th>Username</th>
-                                    <th>Level</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
-                                $results = $mysqli->query("SELECT * FROM user");
-
-                                if ($results->num_rows > 0) {
-                                    
-                                    $no =1;
-                                    while ($row = $results->fetch_assoc()) {
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $no++; ?></td>
-                                            <td><?=$row['user'] ?></td>
-                                            <td><?=$row['level'] ?></td>
-                                            <td>
-                                                <a class="btn btn-sm btn-warning" href="v_edit.php?id_user=<?= $row['id_user']?>">Edit</a>
-                                                <a class="btn btn-sm btn-danger" href="func_del_user.php?id_user=<?=$row["id_user"]?>">Delete</a>
-                                            </td>
-                                        </tr>
-                                        <?php 
-                                    }
-                                }
-                                ?>
-                            </tbody>
-                        </table>
+                    <form action="func_edit_profile.php?id_user=<?= $_SESSION['id_user'] ?>" method="POST">
+                      <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" name="user" value="<?= $_SESSION['user'] ?>">
+                      </div>
+                      <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="pass" value="<?= $_SESSION['pass'] ?>">
+                      </div>
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-sm btn-success">Update Profile</button>
+                      </div>
+                    </form>
                     </div>
                 </div>
                 <br>
@@ -169,72 +143,5 @@
     <script src="../../js/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-    <!-- page script -->
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('table').DataTable();
-            $('#denomKoin').DataTable();
-        });
-         $('#myTab').on('click', function(e) {
-             e.preventDefault();
-             if (isValid()) {
-                alert('bener valid')
-               $(this).tab('show');
-             }
-           });
-        
-           function isValid() {
-             const text = $("#homeText").val();
-             console.log(text)
-             if (text.length === 0) {
-                alert('false')
-               return false;
-             }
-              alert('true')
-             return true;
-           }
-        $(document).on('click', '#id_denom', function() {
-          var id_denom_kertas = $(this).data('id_denom_kertas');
-          var denom_kertas = $(this).data('denom_kertas');
-          var inpak = $(this).data('inpak');
-          var rp1 = $(this).data('rp1');
-          var rp2 = $(this).data('rp2');
-          var rp3 = $(this).data('rp3');
-          var rp4 = $(this).data('rp4');
-          var rp5 = $(this).data('rp5');
-          var rp6 = $(this).data('rp6');
-        
-          $('#id_denom_kertas').val(id_denom_kertas);
-          $('#denom_kertas').val(denom_kertas)
-          $('#inpak').val(inpak)
-          $('#rp1').val(rp1)
-          $('#rp2').val(rp2)
-          $('#rp3').val(rp3)
-          $('#rp4').val(rp4)
-          $('#rp5').val(rp5)
-          $('#rp6').val(rp6)
-        
-          $('#modal_edit').modal('show');
-        });
-        
-        $('#update_data').on('click', function(e) {
-          e.preventDefault();
-          var form_data = {
-            id_denom_kertas: $('#id_denom_kertas').val(),
-            denom_kertas: $('#denom_kertas').val(),
-            rp1: $('#rp1').val(),
-            rp2: $('#rp2').val(),
-            rp3: $('#rp3').val(),
-            rp4: $('#rp4').val(),
-            rp5: $('#rp5').val(),
-            rp6: $('#rp6').val(),
-            inpak: $('#inpak').val(),
-          }
-          var type = "POST";
-          var id_denom_kertas = $('#id_denom_kertas').val();
-          var dataType = 'JSON';
-        
-        })
-   </script>
 </body>
 </html>
