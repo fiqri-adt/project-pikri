@@ -20,6 +20,12 @@ class Lib
 		return $_GET[$value];
 	}
 
+	public function cetakPDF($table, $where, $between)
+	{
+		// SELECT * FROM denom_kertas
+		// WHERE created_at 
+		// BETWEEN 2021-01-04 AND 2021-01-04;
+	}
 
 	/* Query Insert */
     public function insert($table,$data){

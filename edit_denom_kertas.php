@@ -25,11 +25,11 @@
 		$result = $mysqli->query("SELECT * FROM `denom_kertas` WHERE `id_denom_kertas` = ".$_GET['id_denom_kertas']."");
 
 		if($result->num_rows > 0){
-           $data = mysqli_fetch_object($result);
-        }else{
-           echo "data tidak tersedia";
-           die();
-        }
+       $data = mysqli_fetch_object($result);
+    }else{
+       echo "data tidak tersedia";
+       die();
+    }
 
 ?>
 

@@ -77,6 +77,12 @@
                             </ul>
                             <div class="tab-content clearfix">
                                 <div class="tab-pane active table-responsive" id="1a">
+                                    <form action="denom_kertas_process/func_kertas_pdf.php" method="GET">
+                                        <button class="btn btn-sm btn-danger" type="submit">TO PDF</button>
+                                    </form>
+                                    <form action="denom_kertas_process/func_kertas_pdf.php" method="GET">
+                                        <button class="btn btn-sm btn-primary" type="submit">TO EXCEL</button>
+                                    </form>
                                     <table id="denomKertas" class="table table-bordered table-striped dataTable">
                                         <thead>
                                             <tr role="row">
