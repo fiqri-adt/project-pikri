@@ -12,7 +12,7 @@
 		// print_r($_GET); die();
 		echo "<script>
        alert('Data berhasil di hapus');
-       window.location.href='../denom_kertas.php';
+       window.location.href='../dashboard_karyawan.php';
        </script>";
 	}
 

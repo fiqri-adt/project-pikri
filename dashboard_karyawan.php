@@ -134,10 +134,6 @@
                                                 ?>
                                                 </td>
                                                 <td>
-                                                    <!-- <form action="denom_kertas_process/process_delete_kertas.php" method="GET">
-                                                        <input class="form-control" name="id_denom_kertas" type="hidden" value="<?= $row['id_denom_kertas']?>"> 
-                                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                                        </form> -->
                                                     <a class="btn btn-sm btn-danger" href="denom_kertas_process/process_delete_kertas.php?id_denom_kertas=<?= $row['id_denom_kertas']?>">Delete</a>
                                                     <a class="btn btn-sm btn-warning" href="edit_denom_kertas.php?id_denom_kertas=<?= $row['id_denom_kertas']?>">Edit</a>
                                                 </td>
@@ -257,7 +253,7 @@
                                                 ?>
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-sm btn-danger" href="denom_kertas_process/process_delete_kertas.php?id_denom_kertas=<?= $row['id_denom_kertas']?>">Delete</a>
+                                                    <a class="btn btn-sm btn-danger" href="denom_koin_process/process_delete_koin.php?id_denom_koin=<?= $row['id_denom_koin']?>">Delete</a>
                                                     <a class="btn btn-sm btn-warning" href="edit_denom_koin.php?id_denom_koin=<?= $row['id_denom_koin']?>">Edit</a>
                                                 </td>
                                             </tr>

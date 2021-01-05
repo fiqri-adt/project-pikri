@@ -24,11 +24,6 @@
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -40,7 +35,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Asisten Manager</a>
+                <a class="navbar-brand" href="#">Karyawan</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -52,7 +47,7 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-3 col-md-2 sidebar">
+             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
                     <?php if($_SESSION['level']=='asmen'){?>
                     <li class="active"><a href="">Master Data Denom</a></li>
@@ -66,7 +61,7 @@
                 <h2 class="page-header">Dashboard <?php echo ucfirst($_SESSION['level']);?></h2>
                 <div class="row">
                     <div class="col-lg-12">
-                        <div id="exTab1">
+                        <div class="exTab1">
                             <ul  class="nav nav-pills">
                                 <li class="active">
                                     <a href="#1a" data-toggle="tab">Denom Kertas</a>
@@ -77,13 +72,18 @@
                             </ul>
                             <div class="tab-content clearfix">
                                 <div class="tab-pane active table-responsive" id="1a">
-                                    <form action="denom_kertas_process/func_kertas_pdf.php" method="GET">
-                                        <button class="btn btn-sm btn-danger" type="submit">TO PDF</button>
-                                    </form>
-                                    <form action="denom_kertas_process/func_kertas_pdf.php" method="GET">
-                                        <button class="btn btn-sm btn-primary" type="submit">TO EXCEL</button>
-                                    </form>
-                                    <table id="denomKertas" class="table table-bordered table-striped dataTable">
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <form action="denom_kertas_process/func_kertas_excel.php" method="GET">
+                                                <button class="btn btn-sm btn-primary" type="submit">TO EXCEL</button>
+                                            </form>
+                                            <form action="denom_kertas_process/func_kertas_pdf.php" method="GET">
+                                                <button class="btn btn-sm btn-danger" type="submit">TO PDF</button>
+                                            </form>
+                                        </div>
+                                    </div><br>
+                                    <table id="denomKertas" class="table table-bordered dataTable">
                                         <thead>
                                             <tr role="row">
                                                 <th>NO</th>
@@ -97,18 +97,17 @@
                                                 <th>Inpak</th>
                                                 <th>Total</th>
                                                 <th>Tanggal</th>
-                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         <?php 
-                                        $results = $mysqli->query("SELECT * FROM denom_kertas");
+                                        $results = $mysqli->query("SELECT *, id_denom_kertas as id FROM denom_kertas");
                                         if ($results->num_rows > 0) {
                                             $no = 1;
                                             while ($row = $results->fetch_assoc()) {
                                             ?>
-                                            <tr>
-                                                <td><?php echo $no++; ?></td>
+                                            <tr id="<?php echo $row ['id']; ?>">
+                                                <td><?= $row['id'] ?></td>
                                                 <td><?= $row['denom_kertas'] ?></td>
                                                 <td><?= $row['rp1'] ?></td>
                                                 <td><?= $row['rp2'] ?></td>
@@ -125,15 +124,8 @@
                                                     echo $value; 
                                                 }
                                                 ?>
+                                                </td>
                                                 <td><?= $row['created_at'] ?></td>
-                                                </td>
-                                                <td>
-                                                    <!-- <form action="denom_kertas_process/process_delete_kertas.php" method="GET">
-                                                        <input class="form-control" name="id_denom_kertas" type="hidden" value="<?= $row['id_denom_kertas']?>"> 
-                                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                                        </form> -->
-                                                    <a class="btn btn-sm btn-warning" href="edit_denom_kertas.php?id_denom_kertas=<?= $row['id_denom_kertas']?>">Edit</a>
-                                                </td>
                                             </tr>
                                             <?php 
                                             }
@@ -207,7 +199,7 @@
                                 <div class="tab-pane table-responsive" id="2a">
                                     <table id="denomKoin" class="table table-bordered table-striped dataTable">
                                         <thead>
-                                            <tr role="row">
+                                            <tr>
                                                 <th>NO</th>
                                                 <th>Denom Koin</th>
                                                 <th>RP1</th>
@@ -326,73 +318,11 @@
                         </div>
                     </div>
                 </div>
-                <br>
             </div>
         </div>
     </div>
-    </div>
-    <!-- Modal Add -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="denom_kertas_process/process_denom_kertas.php" method="POST">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Denom</label>
-                                    <input type="number" name="denom_kertas" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Rp1</label>
-                                    <input type="number" name="rp1" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Rp3</label>
-                                    <input type="number" name="rp3" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Rp5</label>
-                                    <input type="number" name="rp5" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Inpak</label>
-                                    <input type="number" name="inpak" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Rp2</label>
-                                    <input type="number" name="rp2" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Rp4</label>
-                                    <input type="number" name="rp4" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Rp6</label>
-                                    <input type="number" name="rp6" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Bootstrap core JavaScript
+    
+     <!-- Bootstrap core JavaScript
         ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery.min.js"></script>
@@ -403,6 +333,7 @@
     <script src="js/dataTables.tableTools.min.js" type="text/javascript"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <script src="js/holder.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-tabledit@1.0.0/jquery.tabledit.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
     <!-- page script -->
@@ -411,66 +342,18 @@
             $('#denomKertas').DataTable();
             $('#denomKoin').DataTable();
         });
-         $('#myTab').on('click', function(e) {
-             e.preventDefault();
-             if (isValid()) {
-                alert('bener valid')
-               $(this).tab('show');
-             }
-           });
-        
-           function isValid() {
-             const text = $("#homeText").val();
-             console.log(text)
-             if (text.length === 0) {
-                alert('false')
-               return false;
-             }
-              alert('true')
-             return true;
-           }
-        $(document).on('click', '#id_denom', function() {
-          var id_denom_kertas = $(this).data('id_denom_kertas');
-          var denom_kertas = $(this).data('denom_kertas');
-          var inpak = $(this).data('inpak');
-          var rp1 = $(this).data('rp1');
-          var rp2 = $(this).data('rp2');
-          var rp3 = $(this).data('rp3');
-          var rp4 = $(this).data('rp4');
-          var rp5 = $(this).data('rp5');
-          var rp6 = $(this).data('rp6');
-        
-          $('#id_denom_kertas').val(id_denom_kertas);
-          $('#denom_kertas').val(denom_kertas)
-          $('#inpak').val(inpak)
-          $('#rp1').val(rp1)
-          $('#rp2').val(rp2)
-          $('#rp3').val(rp3)
-          $('#rp4').val(rp4)
-          $('#rp5').val(rp5)
-          $('#rp6').val(rp6)
-        
-          $('#modal_edit').modal('show');
+        $(document).ready(function(){
+            $('#denomKertas').Tabledit({
+            deleteButton: false,
+            editButton: false,
+            columns: {
+                identifier: [0, 'id'],
+                editable: [[1, 'denom_kertas'], [2, 'rp1'], [3, 'rp2'], [4, 'rp3'], [5, 'rp4'], [6, 'rp5'], [7, 'rp6'], [8, 'inpak'], [9, 'total'], [10, 'created_at']]
+            },
+            hideIdentifier: false,
+            url: 'denom_kertas_process/edit_denom_kertas.php'
+            });
         });
-        
-        $('#update_data').on('click', function(e) {
-          e.preventDefault();
-          var form_data = {
-            id_denom_kertas: $('#id_denom_kertas').val(),
-            denom_kertas: $('#denom_kertas').val(),
-            rp1: $('#rp1').val(),
-            rp2: $('#rp2').val(),
-            rp3: $('#rp3').val(),
-            rp4: $('#rp4').val(),
-            rp5: $('#rp5').val(),
-            rp6: $('#rp6').val(),
-            inpak: $('#inpak').val(),
-          }
-          var type = "POST";
-          var id_denom_kertas = $('#id_denom_kertas').val();
-          var dataType = 'JSON';
-        
-        })
-   </script>
+    </script>
 </body>
 </html>

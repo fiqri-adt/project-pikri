@@ -1,8 +1,5 @@
 <?php 
-	/*header("Content-type: application/vnd-ms-excel");
-	header("Content-Disposition: attachment; filename=Data Mahasiswa.xls");*/
-	header("Content-type:application/pdf");
-	header("Content-Disposition:attachment;filename='downloaded.pdf'");
+	include "../cetak_pdf.php";
 	
 	session_start();
 	include '../koneksi.php';
