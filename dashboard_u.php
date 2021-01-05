@@ -21,9 +21,7 @@
     <!-- DATA TABLES -->
     <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="css/dataTables.tableTools.min.css" rel="stylesheet" type="text/css" />
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -333,9 +331,9 @@
     <script src="js/dataTables.tableTools.min.js" type="text/javascript"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <script src="js/holder.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-tabledit@1.0.0/jquery.tabledit.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- Jquery Edit Table Live -->
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-tabledit@1.0.0/jquery.tabledit.min.js"></script> -->
+    <script type="text/javascript" src="js/jquery-tabledit/jquery.tabledit.min.js"></script>
     <!-- page script -->
     <script type="text/javascript">
         $(document).ready(function() {
@@ -344,6 +342,14 @@
         });
         $(document).ready(function(){
             $('#denomKertas').Tabledit({
+            url: 'denom_kertas_process/edit_denom_kertas.php',
+            buttons: {
+                delete: {
+                    class: 'btn btn-sm btn-danger',
+                    html: '<span class="fa fa-trash"></span>',
+                    action: 'delete'
+                },
+            },
             deleteButton: false,
             editButton: false,
             columns: {
@@ -351,7 +357,11 @@
                 editable: [[1, 'denom_kertas'], [2, 'rp1'], [3, 'rp2'], [4, 'rp3'], [5, 'rp4'], [6, 'rp5'], [7, 'rp6'], [8, 'inpak'], [9, 'total'], [10, 'created_at']]
             },
             hideIdentifier: false,
-            url: 'denom_kertas_process/edit_denom_kertas.php'
+            onSuccess: function(data, textStatus, jqXHR){
+                if (data == 'success') {
+                    window.location.reload();
+                }
+            }
             });
         });
     </script>

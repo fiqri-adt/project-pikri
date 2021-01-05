@@ -2,9 +2,10 @@
 
 session_start();
 include "../koneksi.php";
+header('Content-Type: application/json');
 
 $input = filter_input_array(INPUT_POST);
-// print_r($input); die();
+
 if ($input['action'] == 'edit') {
   $update_field='';
   if(isset($input['denom_kertas'])) {
@@ -35,9 +36,12 @@ if ($input['action'] == 'edit') {
       exit();
 
     }else{
-      echo json_encode('Berhasil');
+      echo json_encode('success');
     }
   }
+}elseif ($input['action'] == 'delete') {
+  print_r($input['id']);
+  echo json_encode('Delete Berhasil');
 }
 
 ?>
