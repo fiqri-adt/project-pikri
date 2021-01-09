@@ -58,7 +58,7 @@
                     <li class=""><a href="../../dashboard_u.php">Master Data Denom</a></li>
                     <li class=""><a href="asmen/pengeluaran/v_index.php">Pengeluaran</a></li>
                     <li class="active"><a href="asmen/users/v_index.php">Management Users</a></li>
-                    <li class="active"><a href="asmen/profile/v_index.php">Porfile</a></li>
+                    <li><a href="asmen/profile/v_index.php">Porfile</a></li>
                     <?php } ?>
                 </ul>
             </div>

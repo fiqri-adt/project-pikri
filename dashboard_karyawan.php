@@ -108,7 +108,9 @@
                                         </thead>
                                         <tbody>
                                         <?php 
-                                        $results = $mysqli->query("SELECT * FROM denom_kertas");
+                                        $results = $mysqli->query("SELECT * FROM denom_kertas INNER JOIN user on denom_kertas.id_users = user.id_user WHERE user.id_user =$_SESSION[id_user]");
+                                        // $results->fetch_object();
+                                        // var_dump($results);
                                         if ($results->num_rows > 0) {
                                             $no = 1;
                                             while ($row = $results->fetch_assoc()) {

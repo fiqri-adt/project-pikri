@@ -9,11 +9,15 @@
 	$rp4 = $_POST['rp4'];
 	$rp5 = $_POST['rp5'];
 	$rp6 = $_POST['rp6'];
+	$id_users = $_SESSION['id_user'];
 	$inpak = $_POST['inpak'];
 	$created_at = date('Y-m-d H:s:i');
 	$updated_at = date('Y-m-d H:s:i');
 	
-	$result = $mysqli->query("INSERT INTO denom_kertas ( denom_kertas, rp1, rp2, rp3, rp4, rp5, rp6, inpak, created_at, updated_at) VALUES ('$denom_kertas','$rp1','$rp2','$rp3','$rp4','$rp5','$rp6','$inpak', '$created_at', '$updated_at')");
+
+	$result = $mysqli->query("INSERT INTO denom_kertas ( denom_kertas, rp1, rp2, rp3, rp4, rp5, rp6, inpak, id_users ,created_at, updated_at) VALUES ('$denom_kertas','$rp1','$rp2','$rp3','$rp4','$rp5','$rp6','$inpak', '$id_users', '$created_at', '$updated_at')");
+	// $result = "INSERT INTO denom_kertas ( denom_kertas, rp1, rp2, rp3, rp4, rp5, rp6, inpak, id_user ,created_at, updated_at) VALUES ('$denom_kertas','$rp1','$rp2','$rp3','$rp4','$rp5','$rp6','$inpak', '$id_user', '$created_at', '$updated_at')";
+	// echo $result; die();
 	if(!$result){
 		echo $mysqli->connect_errno." - ".$mysqli->connect_error;
 		exit();

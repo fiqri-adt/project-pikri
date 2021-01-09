@@ -130,6 +130,16 @@
                                         }
                                         ?>
                                         </tbody>
+                                        <!-- Selisih -->
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th>Selisih</th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+
+                                        <!-- Jumlah -->
                                         <tfoot>
                                             <tr role="row">
                                                 <th></th>
@@ -164,7 +174,7 @@
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $jumlah_per_rp5 = $mysqli->query("SELECT SUM(denom_kertas * rp5) AS JumlahRp5 FROM denom_kertas");
+                                                        $jumlah_per_rp5 = $mysqli->query("SELECT SUM(denom_kertas * rp5) AS JumlahRp5 FROM denom_kertas"    );
                                                         $resultKertas5 = $jumlah_per_rp5->fetch_assoc();
                                                         print_r($resultKertas5['JumlahRp5']);
                                                         ?>
@@ -189,6 +199,111 @@
                                                         $result_kertas = $total_denom_kertas->fetch_assoc();
                                                         print_r($result_kertas['Total']);
                                                         ?>
+                                                </th>
+                                            </tr>
+                                        </tfoot>
+
+                                        <!-- Total -->
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th>Total</th>
+                                                <th>
+                                                    <?php 
+                                                        $jumlah_rp1_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp1) as total FROM denom_kertas");
+                                                        $result_rp1_kertas = $jumlah_rp1_kertas->fetch_assoc();
+
+                                                        $jumlah_rp1_koin = $mysqli->query("SELECT SUM(denom_koin * rp1) as total FROM denom_koin");
+                                                        $result_rp1_koin = $jumlah_rp1_koin->fetch_assoc();
+
+                                                        $jumlah = $result_rp1_kertas['total'] + $result_rp1_koin['total'];
+                                                        echo $jumlah;
+
+                                                    ?>
+                                                </th>
+                                                <th>
+                                                    <?php 
+                                                        $jumlah_rp2_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp2) as total FROM denom_kertas");
+                                                        $result_rp2_kertas = $jumlah_rp2_kertas->fetch_assoc();
+
+                                                        $jumlah_rp2_koin = $mysqli->query("SELECT SUM(denom_koin * rp2) as total FROM denom_koin");
+                                                        $result_rp2_koin = $jumlah_rp2_koin->fetch_assoc();
+
+                                                        $jumlah = $result_rp2_kertas['total'] + $result_rp2_koin['total'];
+                                                        echo $jumlah;
+                                                    ?>
+                                                </th>
+                                                <th>
+                                                    <?php 
+                                                        $jumlah_rp3_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp3) as total FROM denom_kertas");
+                                                        $result_rp3_kertas = $jumlah_rp3_kertas->fetch_assoc();
+
+                                                        $jumlah_rp3_koin = $mysqli->query("SELECT SUM(denom_koin * rp3) as total FROM denom_koin");
+                                                        $result_rp3_koin = $jumlah_rp3_koin->fetch_assoc();
+
+                                                        $jumlah = $result_rp3_kertas['total'] + $result_rp3_koin['total'];
+                                                        echo $jumlah;
+                                                    ?>
+                                                </th>
+                                                <th>
+                                                    <?php 
+                                                        $jumlah_rp4_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp4) as total FROM denom_kertas");
+                                                        $result_rp4_kertas = $jumlah_rp4_kertas->fetch_assoc();
+
+                                                        $jumlah_rp4_koin = $mysqli->query("SELECT SUM(denom_koin * rp4) as total FROM denom_koin");
+                                                        $result_rp4_koin = $jumlah_rp4_koin->fetch_assoc();
+
+                                                        $jumlah = $result_rp4_kertas['total'] + $result_rp4_koin['total'];
+                                                        echo $jumlah;
+                                                    ?>
+                                                </th>
+                                                <th>
+                                                    <?php 
+                                                        $jumlah_rp5_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp5) as total FROM denom_kertas");
+                                                        $result_rp5_kertas = $jumlah_rp5_kertas->fetch_assoc();
+
+                                                        $jumlah_rp5_koin = $mysqli->query("SELECT SUM(denom_koin * rp5) as total FROM denom_koin");
+                                                        $result_rp5_koin = $jumlah_rp5_koin->fetch_assoc();
+
+                                                        $jumlah = $result_rp5_kertas['total'] + $result_rp5_koin['total'];
+                                                        echo $jumlah;
+                                                    ?>
+                                                </th>
+                                                <th>
+                                                    <?php 
+                                                        $jumlah_rp6_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp6) as total FROM denom_kertas");
+                                                        $result_rp6_kertas = $jumlah_rp6_kertas->fetch_assoc();
+
+                                                        $jumlah_rp6_koin = $mysqli->query("SELECT SUM(denom_koin * rp6) as total FROM denom_koin");
+                                                        $result_rp6_koin = $jumlah_rp6_koin->fetch_assoc();
+
+                                                        $jumlah = $result_rp6_kertas['total'] + $result_rp6_koin['total'];
+                                                        echo $jumlah;
+                                                    ?>
+                                                </th>
+                                                <th>
+                                                    <?php 
+                                                        $jumlah_inpak_kertas = $mysqli->query("SELECT SUM(denom_kertas * inpak) as total FROM denom_kertas");
+                                                        $result_inpak_kertas = $jumlah_inpak_kertas->fetch_assoc();
+
+                                                        $jumlah_inpak_koin = $mysqli->query("SELECT SUM(denom_koin * inpak) as total FROM denom_koin");
+                                                        $result_inpak_koin = $jumlah_inpak_koin->fetch_assoc();
+
+                                                        $jumlah = $result_inpak_kertas['total'] + $result_inpak_koin['total'];
+                                                        echo $jumlah;
+                                                    ?>
+                                                </th>
+                                                <th>
+                                                    <?php 
+                                                        $total_denom_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp1)+SUM(denom_kertas * rp2)+SUM(denom_kertas * rp3)+SUM(denom_kertas * rp4)+SUM(denom_kertas * rp5)+SUM(denom_kertas * rp6) AS Total FROM denom_kertas");
+                                                        $result_kertas = $total_denom_kertas->fetch_assoc();
+
+                                                        $total_denom_koin = $mysqli->query("SELECT SUM(denom_koin * rp1)+SUM(denom_koin * rp2)+SUM(denom_koin * rp3)+SUM(denom_koin * rp4)+SUM(denom_koin * rp5)+SUM(denom_koin * rp6) AS Total FROM denom_koin");
+                                                        $result_koin = $total_denom_koin->fetch_assoc();
+
+                                                        $jumlah = $result_kertas['Total'] + $result_koin['Total'];
+                                                        echo $jumlah;
+                                                    ?>
                                                 </th>
                                             </tr>
                                         </tfoot>

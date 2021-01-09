@@ -3,7 +3,7 @@
 	
 	session_start();
 	include '../koneksi.php';
-	$result = $mysqli->query("SELECT * FROM denom_kertas WHERE created_at BETWEEN 2021-01-04 AND 2021-01-04");
+	$result = $mysqli->query("SELECT * FROM denom_kertas WHERE created_at BETWEEN ".$_GET['tgl_pertama']."" AND "".$_GET['tgl_kedua']."");
 
 	if(!$result){
 		echo $mysqli->connect_errno." - ".$mysqli->connect_error;
