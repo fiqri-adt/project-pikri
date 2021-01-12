@@ -56,6 +56,7 @@
                 <ul class="nav nav-sidebar">
                     <?php if($_SESSION['level']=='karyawan'){?>
                     <li class="active"><a href="">Master Data Denom</a></li>
+                    <li class=""><a href="./karyawan/profile/v_index.php">Profile</a></li>
                     <?php } ?>
                 </ul>
             </div>

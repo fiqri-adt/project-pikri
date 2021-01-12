@@ -65,10 +65,9 @@
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
                     <?php if($_SESSION['level']=='asmen'){?>
-                    <li class=""><a href="../../dashboard_u.php">Master Data Denom</a></li>
-                    <li class=""><a href="../pengeluaran/v_index.php">Pengeluaran</a></li>
-                    <li class=""><a href="../users/v_index.php">Management Users</a></li>
-                    <li class="active"><a href="asmen/profile/v_index.php">Profile</a></li>
+                    <li class=""><a href="../../dashboard_manager.php">Dashboard Manager</a></li>
+                    <li class="active"><a href="v_index.php">Profile</a></li>
+                    <li><a href="../../logout.php">Logout</a></li>
                     <?php } ?>
                 </ul>
             </div>
@@ -95,6 +94,50 @@
             </div>
         </div>
     </div>
+    </div>
+
+    <!-- Modal Add -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="func_add_user.php" method="POST">
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="form-group">
+                              <label>Username</label>
+                              <input type="text" name="user" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label>Password</label>
+                              <input type="text" name="pass" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label>Level</label>
+                              <select name="level" class="form-control">
+                                <option value="manager">Manager</option>
+                                <option value="asmen">Asmen</option>
+                                <option value="karyawan">Karyawan</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- Bootstrap core JavaScript
         ================================================== -->
