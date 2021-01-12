@@ -36,7 +36,13 @@ if ($input['action'] == 'edit') {
       exit();
 
     }else{
-      echo json_encode('success');
+
+      if ($_SESSION['level'] == 'karyawan') {
+          echo json_encode('success');
+        
+      }elseif ($_SESSION['level'] == 'manager') {
+          echo json_encode('success');
+      }
     }
   }
 }elseif ($input['action'] == 'delete') {

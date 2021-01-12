@@ -64,8 +64,8 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <?php if($_SESSION['level']=='asmen'){?>
-                    <li class=""><a href="../../dashboard_manager.php">Dashboard Manager</a></li>
+                    <?php if($_SESSION['level']=='manager'){?>
+                    <li><a href="../../dashboard_manager.php">Dashboard Manager</a></li>
                     <li class="active"><a href="v_index.php">Profile</a></li>
                     <li><a href="../../logout.php">Logout</a></li>
                     <?php } ?>

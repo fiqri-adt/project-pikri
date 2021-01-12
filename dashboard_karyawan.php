@@ -138,7 +138,6 @@
                                                 </td>
                                                 <td>
                                                     <a class="btn btn-sm btn-danger" href="denom_kertas_process/process_delete_kertas.php?id_denom_kertas=<?= $row['id_denom_kertas']?>">Delete</a>
-                                                    <a class="btn btn-sm btn-warning" href="edit_denom_kertas.php?id_denom_kertas=<?= $row['id_denom_kertas']?>">Edit</a>
                                                 </td>
                                             </tr>
                                             <?php 
@@ -257,7 +256,6 @@
                                                 </td>
                                                 <td>
                                                     <a class="btn btn-sm btn-danger" href="denom_koin_process/process_delete_koin.php?id_denom_koin=<?= $row['id_denom_koin']?>">Delete</a>
-                                                    <a class="btn btn-sm btn-warning" href="edit_denom_koin.php?id_denom_koin=<?= $row['id_denom_koin']?>">Edit</a>
                                                 </td>
                                             </tr>
                                             <?php 
@@ -265,13 +263,24 @@
                                         }
                                         ?>
                                         </tbody>
+
+                                        <!-- Selisih -->
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th>Selisih</th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+
+                                        <!-- Jumlah -->
                                         <tfoot>
                                             <tr>
                                                 <th></th>
                                                 <th>Jumlah</th>
                                                 <th>
                                                     <?php 
-                                                        $denom_koin_1 = $mysqli->query("SELECT SUM(denom_koin * rp1) AS JumlahRp1 FROM denom_koin");
+                                                        $denom_koin_1 = $mysqli->query("SELECT SUM(denom_koin)*SUM(rp1) AS JumlahRp1 FROM denom_koin INNER JOIN user ON denom_koin.id_users = user.id_user WHERE user.id_user = 7");
                                                         $resultkoin1 = $denom_koin_1->fetch_assoc();
                                                         print_r($resultkoin1['JumlahRp1']);
                                                         ?>
@@ -324,6 +333,111 @@
                                                         $result_koin = $total_denom_koin->fetch_assoc();
                                                         print_r($result_koin['Total']);
                                                         ?>
+                                                </th>
+                                            </tr>
+                                        </tfoot>
+
+                                         <!-- Total -->
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th>Total</th>
+                                                <th>
+                                                    <?php 
+                                                        $jumlah_rp1_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp1) as total FROM denom_kertas");
+                                                        $result_rp1_kertas = $jumlah_rp1_kertas->fetch_assoc();
+
+                                                        $jumlah_rp1_koin = $mysqli->query("SELECT SUM(denom_koin * rp1) as total FROM denom_koin");
+                                                        $result_rp1_koin = $jumlah_rp1_koin->fetch_assoc();
+
+                                                        $jumlah = $result_rp1_kertas['total'] + $result_rp1_koin['total'];
+                                                        echo $jumlah;
+
+                                                    ?>
+                                                </th>
+                                                <th>
+                                                    <?php 
+                                                        $jumlah_rp2_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp2) as total FROM denom_kertas");
+                                                        $result_rp2_kertas = $jumlah_rp2_kertas->fetch_assoc();
+
+                                                        $jumlah_rp2_koin = $mysqli->query("SELECT SUM(denom_koin * rp2) as total FROM denom_koin");
+                                                        $result_rp2_koin = $jumlah_rp2_koin->fetch_assoc();
+
+                                                        $jumlah = $result_rp2_kertas['total'] + $result_rp2_koin['total'];
+                                                        echo $jumlah;
+                                                    ?>
+                                                </th>
+                                                <th>
+                                                    <?php 
+                                                        $jumlah_rp3_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp3) as total FROM denom_kertas");
+                                                        $result_rp3_kertas = $jumlah_rp3_kertas->fetch_assoc();
+
+                                                        $jumlah_rp3_koin = $mysqli->query("SELECT SUM(denom_koin * rp3) as total FROM denom_koin");
+                                                        $result_rp3_koin = $jumlah_rp3_koin->fetch_assoc();
+
+                                                        $jumlah = $result_rp3_kertas['total'] + $result_rp3_koin['total'];
+                                                        echo $jumlah;
+                                                    ?>
+                                                </th>
+                                                <th>
+                                                    <?php 
+                                                        $jumlah_rp4_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp4) as total FROM denom_kertas");
+                                                        $result_rp4_kertas = $jumlah_rp4_kertas->fetch_assoc();
+
+                                                        $jumlah_rp4_koin = $mysqli->query("SELECT SUM(denom_koin * rp4) as total FROM denom_koin");
+                                                        $result_rp4_koin = $jumlah_rp4_koin->fetch_assoc();
+
+                                                        $jumlah = $result_rp4_kertas['total'] + $result_rp4_koin['total'];
+                                                        echo $jumlah;
+                                                    ?>
+                                                </th>
+                                                <th>
+                                                    <?php 
+                                                        $jumlah_rp5_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp5) as total FROM denom_kertas");
+                                                        $result_rp5_kertas = $jumlah_rp5_kertas->fetch_assoc();
+
+                                                        $jumlah_rp5_koin = $mysqli->query("SELECT SUM(denom_koin * rp5) as total FROM denom_koin");
+                                                        $result_rp5_koin = $jumlah_rp5_koin->fetch_assoc();
+
+                                                        $jumlah = $result_rp5_kertas['total'] + $result_rp5_koin['total'];
+                                                        echo $jumlah;
+                                                    ?>
+                                                </th>
+                                                <th>
+                                                    <?php 
+                                                        $jumlah_rp6_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp6) as total FROM denom_kertas");
+                                                        $result_rp6_kertas = $jumlah_rp6_kertas->fetch_assoc();
+
+                                                        $jumlah_rp6_koin = $mysqli->query("SELECT SUM(denom_koin * rp6) as total FROM denom_koin");
+                                                        $result_rp6_koin = $jumlah_rp6_koin->fetch_assoc();
+
+                                                        $jumlah = $result_rp6_kertas['total'] + $result_rp6_koin['total'];
+                                                        echo $jumlah;
+                                                    ?>
+                                                </th>
+                                                <th>
+                                                    <?php 
+                                                        $jumlah_inpak_kertas = $mysqli->query("SELECT SUM(denom_kertas * inpak) as total FROM denom_kertas");
+                                                        $result_inpak_kertas = $jumlah_inpak_kertas->fetch_assoc();
+
+                                                        $jumlah_inpak_koin = $mysqli->query("SELECT SUM(denom_koin * inpak) as total FROM denom_koin");
+                                                        $result_inpak_koin = $jumlah_inpak_koin->fetch_assoc();
+
+                                                        $jumlah = $result_inpak_kertas['total'] + $result_inpak_koin['total'];
+                                                        echo $jumlah;
+                                                    ?>
+                                                </th>
+                                                <th>
+                                                    <?php 
+                                                        $total_denom_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp1)+SUM(denom_kertas * rp2)+SUM(denom_kertas * rp3)+SUM(denom_kertas * rp4)+SUM(denom_kertas * rp5)+SUM(denom_kertas * rp6) AS Total FROM denom_kertas");
+                                                        $result_kertas = $total_denom_kertas->fetch_assoc();
+
+                                                        $total_denom_koin = $mysqli->query("SELECT SUM(denom_koin * rp1)+SUM(denom_koin * rp2)+SUM(denom_koin * rp3)+SUM(denom_koin * rp4)+SUM(denom_koin * rp5)+SUM(denom_koin * rp6) AS Total FROM denom_koin");
+                                                        $result_koin = $total_denom_koin->fetch_assoc();
+
+                                                        $jumlah = $result_kertas['Total'] + $result_koin['Total'];
+                                                        echo $jumlah;
+                                                    ?>
                                                 </th>
                                             </tr>
                                         </tfoot>
@@ -415,7 +529,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Denom</label>
-                                    <input type="number" name="denom_kertas" class="form-control">
+                                    <input type="number" name="denom_koin" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Rp1</label>
@@ -473,74 +587,72 @@
     <script src="js/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="js/jquery-tabledit/jquery.tabledit.min.js"></script>
     <!-- page script -->
     <script type="text/javascript">
         $(document).ready(function() {
             $('#denomKertas').DataTable();
             $('#denomKoin').DataTable();
         });
-         $('#myTab').on('click', function(e) {
-             e.preventDefault();
-             if (isValid()) {
-                alert('bener valid')
-               $(this).tab('show');
-             }
-           });
-        
-           function isValid() {
-             const text = $("#homeText").val();
-             console.log(text)
-             if (text.length === 0) {
-                alert('false')
-               return false;
-             }
-              alert('true')
-             return true;
-           }
+         
     </script>
+
+    <!-- page script -->
     <script type="text/javascript">
-        $(document).on('click', '#id_denom', function() {
-          var id_denom_kertas = $(this).data('id_denom_kertas');
-          var denom_kertas = $(this).data('denom_kertas');
-          var inpak = $(this).data('inpak');
-          var rp1 = $(this).data('rp1');
-          var rp2 = $(this).data('rp2');
-          var rp3 = $(this).data('rp3');
-          var rp4 = $(this).data('rp4');
-          var rp5 = $(this).data('rp5');
-          var rp6 = $(this).data('rp6');
-        
-          $('#id_denom_kertas').val(id_denom_kertas);
-          $('#denom_kertas').val(denom_kertas)
-          $('#inpak').val(inpak)
-          $('#rp1').val(rp1)
-          $('#rp2').val(rp2)
-          $('#rp3').val(rp3)
-          $('#rp4').val(rp4)
-          $('#rp5').val(rp5)
-          $('#rp6').val(rp6)
-        
-          $('#modal_edit').modal('show');
+        $(document).ready(function() {
+            $('#denomKertas').DataTable();
+            $('#denomKoin').DataTable();
         });
-        
-        $('#update_data').on('click', function(e) {
-          e.preventDefault();
-          var form_data = {
-            id_denom_kertas: $('#id_denom_kertas').val(),
-            denom_kertas: $('#denom_kertas').val(),
-            rp1: $('#rp1').val(),
-            rp2: $('#rp2').val(),
-            rp3: $('#rp3').val(),
-            rp4: $('#rp4').val(),
-            rp5: $('#rp5').val(),
-            rp6: $('#rp6').val(),
-            inpak: $('#inpak').val(),
-          }
-          var type = "POST";
-          var id_denom_kertas = $('#id_denom_kertas').val();
-          var dataType = 'JSON';
-        
-        })
-        </script>
+        $(document).ready(function(){
+            $('#denomKertas').Tabledit({
+            url: 'denom_kertas_process/edit_denom_kertas.php',
+            buttons: {
+                delete: {
+                    class: 'btn btn-sm btn-danger',
+                    html: '<span class="fa fa-trash"></span>',
+                    action: 'delete'
+                },
+            },
+            deleteButton: false,
+            editButton: false,
+            columns: {
+                identifier: [0, 'id'],
+                editable: [[1, 'denom_kertas'], [2, 'rp1'], [3, 'rp2'], [4, 'rp3'], [5, 'rp4'], [6, 'rp5'], [7, 'rp6'], [8, 'inpak'], [9, 'total'], [10, 'created_at']]
+            },
+            hideIdentifier: false,
+            onSuccess: function(data, textStatus, jqXHR){
+                if (data == 'success') {
+                    window.location.reload();
+                }
+            }
+            });
+        });
+
+        $(document).ready(function(){
+            $('#denomKoin').Tabledit({
+            url: 'denom_koin_process/edit_denom_koin.php',
+            buttons: {
+                delete: {
+                    class: 'btn btn-sm btn-danger',
+                    html: '<span class="fa fa-trash"></span>',
+                    action: 'delete'
+                },
+            },
+            deleteButton: false,
+            editButton: false,
+            columns: {
+                identifier: [0, 'id'],
+                editable: [[1, 'denom_kertas'], [2, 'rp1'], [3, 'rp2'], [4, 'rp3'], [5, 'rp4'], [6, 'rp5'], [7, 'rp6'], [8, 'inpak'], [9, 'total'], [10, 'created_at']]
+            },
+            hideIdentifier: false,
+            onSuccess: function(data, textStatus, jqXHR){
+                if (data == 'success') {
+                    window.location.reload();
+                }
+            }
+            });
+        });
+    </script>
+    
 </body>
 </html>

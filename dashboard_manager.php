@@ -56,6 +56,7 @@
                 <ul class="nav nav-sidebar">
                     <?php if($_SESSION['level']=='manager'){?>
                     <li class="active"><a href="">Dashboard Manager</a></li>
+                    <li><a href="manager/profile/v_index.php">Profile</a></li>
                     <li><a href="logout.php">Logout</a></li>
                     <?php } ?>
                 </ul>
