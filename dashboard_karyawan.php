@@ -57,6 +57,7 @@
                     <?php if($_SESSION['level']=='karyawan'){?>
                     <li class="active"><a href="">Master Data Denom</a></li>
                     <li class=""><a href="./karyawan/profile/v_index.php">Profile</a></li>
+                    <li><a href="logout.php">Logout</a></li>
                     <?php } ?>
                 </ul>
             </div>
@@ -102,8 +103,8 @@
                                                 <th>RP5</th>
                                                 <th>RP6</th>
                                                 <th>Inpak</th>
-                                                <th>Tanggal</th>
                                                 <th>Total</th>
+                                                <th>Tanggal</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -126,7 +127,6 @@
                                                 <td><?= $row['rp5'] ?></td>
                                                 <td><?= $row['rp6'] ?></td>
                                                 <td><?= $row['inpak'] ?></td>
-                                                <td><?= $row['created_at'] ?></td>
                                                 <td>
                                                 <?php
                                                 $total_satu_baris = $mysqli->query("SELECT SUM(rp1)+SUM(rp2)+SUM(rp3)+SUM(rp4)+SUM(rp5)+SUM(rp6) as Total FROM denom_kertas WHERE id_denom_kertas= '".$row['id_denom_kertas']."'");
@@ -136,6 +136,7 @@
                                                 }
                                                 ?>
                                                 </td>
+                                                <td><?= $row['created_at'] ?></td>
                                                 <td>
                                                     <a class="btn btn-sm btn-danger" href="denom_kertas_process/process_delete_kertas.php?id_denom_kertas=<?= $row['id_denom_kertas']?>">Delete</a>
                                                 </td>
@@ -145,62 +146,72 @@
                                         }
                                         ?>
                                         </tbody>
+
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </tfoot>
+
+                                        <!-- Jumlah -->
+                                        <!-- Malam Ini Nyelesain Denom Denom Tod ya jangan lupa -->
                                         <tfoot>
                                             <tr role="row">
                                                 <th></th>
                                                 <th>Jumlah</th>
                                                 <th>
                                                     <?php 
-                                                        $jumlah_per_rp1 = $mysqli->query("SELECT SUM(denom_kertas * rp1) AS JumlahRp1 FROM denom_kertas");
+                                                        $jumlah_per_rp1 = $mysqli->query("SELECT SUM(denom_kertas * rp1 ) as JumlahRp1 FROM denom_kertas INNER JOIN user ON denom_kertas.id_users = user.id_user WHERE user.id_user = $_SESSION[id_user]");
                                                         $resultKertas1 = $jumlah_per_rp1->fetch_assoc();
                                                         print_r($resultKertas1['JumlahRp1']);
                                                         ?>
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $jumlah_per_rp2 = $mysqli->query("SELECT SUM(denom_kertas * rp2) AS JumlahRp2 FROM denom_kertas");
+                                                        $jumlah_per_rp2 = $mysqli->query("SELECT SUM(denom_kertas * rp2 ) as JumlahRp2 FROM denom_kertas INNER JOIN user ON denom_kertas.id_users = user.id_user WHERE user.id_user = $_SESSION[id_user]");
                                                         $resultKertas2 = $jumlah_per_rp2->fetch_assoc();
                                                         print_r($resultKertas2['JumlahRp2']);
                                                         ?>
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $jumlah_per_rp3 = $mysqli->query("SELECT SUM(denom_kertas * rp3) AS JumlahRp3 FROM denom_kertas");
+                                                        $jumlah_per_rp3 = $mysqli->query("SELECT SUM(denom_kertas * rp3 ) as JumlahRp3 FROM denom_kertas INNER JOIN user ON denom_kertas.id_users = user.id_user WHERE user.id_user = $_SESSION[id_user]");
                                                         $resultKertas3 = $jumlah_per_rp3->fetch_assoc();
                                                         print_r($resultKertas3['JumlahRp3']);
                                                         ?>
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $jumlah_per_rp4 = $mysqli->query("SELECT SUM(denom_kertas * rp4) AS JumlahRp4 FROM denom_kertas");
+                                                        $jumlah_per_rp4 = $mysqli->query("SELECT SUM(denom_kertas * rp4 ) as JumlahRp4 FROM denom_kertas INNER JOIN user ON denom_kertas.id_users = user.id_user WHERE user.id_user = $_SESSION[id_user]");
                                                         $resultKertas4 = $jumlah_per_rp4->fetch_assoc();
                                                         print_r($resultKertas4['JumlahRp4']);
                                                         ?>
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $jumlah_per_rp5 = $mysqli->query("SELECT SUM(denom_kertas * rp5) AS JumlahRp5 FROM denom_kertas");
+                                                        $jumlah_per_rp5 = $mysqli->query("SELECT SUM(denom_kertas * rp5 ) as JumlahRp5 FROM denom_kertas INNER JOIN user ON denom_kertas.id_users = user.id_user WHERE user.id_user = $_SESSION[id_user]");
                                                         $resultKertas5 = $jumlah_per_rp5->fetch_assoc();
                                                         print_r($resultKertas5['JumlahRp5']);
                                                         ?>
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $jumlah_per_rp6 = $mysqli->query("SELECT SUM(denom_kertas * rp6) AS JumlahRp6 FROM denom_kertas");
+                                                        $jumlah_per_rp6 = $mysqli->query("SELECT SUM(denom_kertas * rp6 ) as JumlahRp6 FROM denom_kertas INNER JOIN user ON denom_kertas.id_users = user.id_user WHERE user.id_user = $_SESSION[id_user]");
                                                         $resultKertas6 = $jumlah_per_rp6->fetch_assoc();
                                                         print_r($resultKertas6['JumlahRp6']);
                                                         ?>
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $inpak = $mysqli->query("SELECT SUM(denom_kertas * inpak) AS Inpak FROM denom_kertas");
+                                                        $inpak = $mysqli->query("SELECT SUM(denom_kertas * inpak ) as Inpak FROM denom_kertas INNER JOIN user ON denom_kertas.id_users = user.id_user WHERE user.id_user = $_SESSION[id_user]");
                                                         $resultInpakKertas = $inpak->fetch_assoc();
                                                         print_r($resultInpakKertas['Inpak']);
                                                         ?>
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $total_denom_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp1)+SUM(denom_kertas * rp2)+SUM(denom_kertas * rp3)+SUM(denom_kertas * rp4)+SUM(denom_kertas * rp5)+SUM(denom_kertas * rp6) AS Total FROM denom_kertas");
+                                                        $total_denom_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp1)+SUM(denom_kertas * rp2)+SUM(denom_kertas * rp3)+SUM(denom_kertas * rp4)+SUM(denom_kertas * rp5)+SUM(denom_kertas * rp6) AS Total FROM denom_kertas INNER JOIN user on denom_kertas.id_users = user.id_user WHERE user.id_user=$_SESSION[id_user]");
                                                         $result_kertas = $total_denom_kertas->fetch_assoc();
                                                         print_r($result_kertas['Total']);
                                                         ?>
@@ -222,8 +233,8 @@
                                                 <th>RP5</th>
                                                 <th>RP6</th>
                                                 <th>Inpak</th>
-                                                <th>Tanggal</th>
                                                 <th>Total</th>
+                                                <th>Tanggal</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -244,7 +255,6 @@
                                                 <td><?= $row['rp5'] ?></td>
                                                 <td><?= $row['rp6'] ?></td>
                                                 <td><?= $row['inpak'] ?></td>
-                                                <td><?= $row['created_at'] ?></td>
                                                 <td>
                                                 <?php
                                                 $total_satu_baris = $mysqli->query("SELECT SUM(rp1)+SUM(rp2)+SUM(rp3)+SUM(rp4)+SUM(rp5)+SUM(rp6) as Total FROM denom_koin WHERE id_denom_koin= '".$row['id_denom_koin']."'");
@@ -253,6 +263,7 @@
                                                     echo $value; 
                                                 }
                                                 ?>
+                                                <td><?= $row['created_at'] ?></td>
                                                 </td>
                                                 <td>
                                                     <a class="btn btn-sm btn-danger" href="denom_koin_process/process_delete_koin.php?id_denom_koin=<?= $row['id_denom_koin']?>">Delete</a>
@@ -273,66 +284,65 @@
                                             </tr>
                                         </tfoot>
 
-                                        <!-- Jumlah -->
                                         <tfoot>
                                             <tr>
                                                 <th></th>
                                                 <th>Jumlah</th>
                                                 <th>
-                                                    <?php 
-                                                        $denom_koin_1 = $mysqli->query("SELECT SUM(denom_koin)*SUM(rp1) AS JumlahRp1 FROM denom_koin INNER JOIN user ON denom_koin.id_users = user.id_user WHERE user.id_user = 7");
-                                                        $resultkoin1 = $denom_koin_1->fetch_assoc();
-                                                        print_r($resultkoin1['JumlahRp1']);
+                                                     <?php 
+                                                        $jumlah_per_rp1 = $mysqli->query("SELECT SUM(denom_koin * rp1 ) as JumlahRp1 FROM denom_koin INNER JOIN user ON denom_koin.id_users = user.id_user WHERE user.id_user = $_SESSION[id_user]");
+                                                        $resultKoin1 = $jumlah_per_rp1->fetch_assoc();
+                                                        print_r($resultKoin1['JumlahRp1']);
                                                         ?>
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $denom_koin_2 = $mysqli->query("SELECT SUM(denom_koin * rp2) AS JumlahRp2 FROM denom_koin");
-                                                        $resultKoin2 = $denom_koin_2->fetch_assoc();
-                                                        print_r($resultKoin2['JumlahRp2']);
+                                                        $jumlah_per_rp1 = $mysqli->query("SELECT SUM(denom_koin * rp2 ) as JumlahRp2 FROM denom_koin INNER JOIN user ON denom_koin.id_users = user.id_user WHERE user.id_user = $_SESSION[id_user]");
+                                                        $resultKoin1 = $jumlah_per_rp1->fetch_assoc();
+                                                        print_r($resultKoin1['JumlahRp2']);
                                                         ?>
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $denom_koin_3 = $mysqli->query("SELECT SUM(denom_koin * rp3) AS JumlahRp3 FROM denom_koin");
-                                                        $resultKoin3 = $denom_koin_3->fetch_assoc();
-                                                        print_r($resultKoin3['JumlahRp3']);
+                                                        $jumlah_per_rp1 = $mysqli->query("SELECT SUM(denom_koin * rp3 ) as JumlahRp3 FROM denom_koin INNER JOIN user ON denom_koin.id_users = user.id_user WHERE user.id_user = $_SESSION[id_user]");
+                                                        $resultKoin1 = $jumlah_per_rp1->fetch_assoc();
+                                                        print_r($resultKoin1['JumlahRp3']);
                                                         ?>
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $denom_koin_4 = $mysqli->query("SELECT SUM(denom_koin * rp4) AS JumlahRp4 FROM denom_koin");
-                                                        $resultKoin4 = $denom_koin_4->fetch_assoc();
-                                                        print_r($resultKoin4['JumlahRp4']);
+                                                        $jumlah_per_rp1 = $mysqli->query("SELECT SUM(denom_koin * rp4 ) as JumlahRp4 FROM denom_koin INNER JOIN user ON denom_koin.id_users = user.id_user WHERE user.id_user = $_SESSION[id_user]");
+                                                        $resultKoin1 = $jumlah_per_rp1->fetch_assoc();
+                                                        print_r($resultKoin1['JumlahRp4']);
                                                         ?>
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $denom_koin_5 = $mysqli->query("SELECT SUM(denom_koin * rp5) AS JumlahRp5 FROM denom_koin");
-                                                        $resultKoin5 = $denom_koin_5->fetch_assoc();
-                                                        print_r($resultKoin5['JumlahRp5']);
+                                                        $jumlah_per_rp1 = $mysqli->query("SELECT SUM(denom_koin * rp5 ) as JumlahRp5 FROM denom_koin INNER JOIN user ON denom_koin.id_users = user.id_user WHERE user.id_user = $_SESSION[id_user]");
+                                                        $resultKoin1 = $jumlah_per_rp1->fetch_assoc();
+                                                        print_r($resultKoin1['JumlahRp5']);
                                                         ?>
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $denom_koin_6 = $mysqli->query("SELECT SUM(denom_koin * rp6) AS JumlahRp6 FROM denom_koin");
-                                                        $resultKoin6 = $denom_koin_6->fetch_assoc();
-                                                        print_r($resultKoin6['JumlahRp6']);
+                                                        $jumlah_per_rp1 = $mysqli->query("SELECT SUM(denom_koin * rp6 ) as JumlahRp6 FROM denom_koin INNER JOIN user ON denom_koin.id_users = user.id_user WHERE user.id_user = $_SESSION[id_user]");
+                                                        $resultKoin1 = $jumlah_per_rp1->fetch_assoc();
+                                                        print_r($resultKoin1['JumlahRp6']);
                                                         ?>
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $inpak = $mysqli->query("SELECT SUM(denom_koin * inpak) AS Inpak FROM denom_koin");
-                                                        $resultInpakKoin = $inpak->fetch_assoc();
-                                                        print_r($resultInpakKoin['Inpak']);
+                                                        $jumlah_per_rp1 = $mysqli->query("SELECT SUM(denom_koin * inpak ) as Inpak FROM denom_koin INNER JOIN user ON denom_koin.id_users = user.id_user WHERE user.id_user = $_SESSION[id_user]");
+                                                        $resultKoin1 = $jumlah_per_rp1->fetch_assoc();
+                                                        print_r($resultKoin1['Inpak']);
                                                         ?>
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $total_denom_koin = $mysqli->query("SELECT SUM(denom_koin * rp1)+SUM(denom_koin * rp2)+SUM(denom_koin * rp3)+SUM(denom_koin * rp4)+SUM(denom_koin * rp5)+SUM(denom_koin * rp6) AS Total FROM denom_koin");
-                                                        $result_koin = $total_denom_koin->fetch_assoc();
-                                                        print_r($result_koin['Total']);
-                                                        ?>
+                                                         $total_denom_koin = $mysqli->query("SELECT SUM(denom_koin * rp1)+SUM(denom_koin * rp2)+SUM(denom_koin * rp3)+SUM(denom_koin * rp4)+SUM(denom_koin * rp5)+SUM(denom_koin * rp6) AS Total FROM denom_koin INNER JOIN user on denom_koin.id_users = user.id_user WHERE user.id_user=$_SESSION[id_user]");
+                                                        $result_kertas = $total_denom_koin->fetch_assoc();
+                                                        print_r($result_kertas['Total']);
+                                                    ?>
                                                 </th>
                                             </tr>
                                         </tfoot>
@@ -344,10 +354,10 @@
                                                 <th>Total</th>
                                                 <th>
                                                     <?php 
-                                                        $jumlah_rp1_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp1) as total FROM denom_kertas");
+                                                        $jumlah_rp1_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp1) as total FROM denom_kertas INNER JOIN user on denom_kertas.id_users = user.id_user WHERE user.id_user=$_SESSION[id_user]");
                                                         $result_rp1_kertas = $jumlah_rp1_kertas->fetch_assoc();
 
-                                                        $jumlah_rp1_koin = $mysqli->query("SELECT SUM(denom_koin * rp1) as total FROM denom_koin");
+                                                        $jumlah_rp1_koin = $mysqli->query("SELECT SUM(denom_koin * rp1) as total FROM denom_koin INNER JOIN user on denom_koin.id_users = user.id_user WHERE user.id_user=$_SESSION[id_user]");
                                                         $result_rp1_koin = $jumlah_rp1_koin->fetch_assoc();
 
                                                         $jumlah = $result_rp1_kertas['total'] + $result_rp1_koin['total'];
@@ -357,10 +367,10 @@
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $jumlah_rp2_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp2) as total FROM denom_kertas");
+                                                        $jumlah_rp2_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp2) as total FROM denom_kertas INNER JOIN user on denom_kertas.id_users = user.id_user WHERE user.id_user=$_SESSION[id_user]");
                                                         $result_rp2_kertas = $jumlah_rp2_kertas->fetch_assoc();
 
-                                                        $jumlah_rp2_koin = $mysqli->query("SELECT SUM(denom_koin * rp2) as total FROM denom_koin");
+                                                        $jumlah_rp2_koin = $mysqli->query("SELECT SUM(denom_koin * rp2) as total FROM denom_koin INNER JOIN user on denom_koin.id_users = user.id_user WHERE user.id_user=$_SESSION[id_user]");
                                                         $result_rp2_koin = $jumlah_rp2_koin->fetch_assoc();
 
                                                         $jumlah = $result_rp2_kertas['total'] + $result_rp2_koin['total'];
@@ -368,11 +378,11 @@
                                                     ?>
                                                 </th>
                                                 <th>
-                                                    <?php 
-                                                        $jumlah_rp3_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp3) as total FROM denom_kertas");
+                                                     <?php 
+                                                        $jumlah_rp3_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp3) as total FROM denom_kertas INNER JOIN user on denom_kertas.id_users = user.id_user WHERE user.id_user=$_SESSION[id_user]");
                                                         $result_rp3_kertas = $jumlah_rp3_kertas->fetch_assoc();
 
-                                                        $jumlah_rp3_koin = $mysqli->query("SELECT SUM(denom_koin * rp3) as total FROM denom_koin");
+                                                        $jumlah_rp3_koin = $mysqli->query("SELECT SUM(denom_koin * rp3) as total FROM denom_koin INNER JOIN user on denom_koin.id_users = user.id_user WHERE user.id_user=$_SESSION[id_user]");
                                                         $result_rp3_koin = $jumlah_rp3_koin->fetch_assoc();
 
                                                         $jumlah = $result_rp3_kertas['total'] + $result_rp3_koin['total'];
@@ -380,11 +390,11 @@
                                                     ?>
                                                 </th>
                                                 <th>
-                                                    <?php 
-                                                        $jumlah_rp4_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp4) as total FROM denom_kertas");
+                                                     <?php 
+                                                        $jumlah_rp4_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp4) as total FROM denom_kertas INNER JOIN user on denom_kertas.id_users = user.id_user WHERE user.id_user=$_SESSION[id_user]");
                                                         $result_rp4_kertas = $jumlah_rp4_kertas->fetch_assoc();
 
-                                                        $jumlah_rp4_koin = $mysqli->query("SELECT SUM(denom_koin * rp4) as total FROM denom_koin");
+                                                        $jumlah_rp4_koin = $mysqli->query("SELECT SUM(denom_koin * rp4) as total FROM denom_koin INNER JOIN user on denom_koin.id_users = user.id_user WHERE user.id_user=$_SESSION[id_user]");
                                                         $result_rp4_koin = $jumlah_rp4_koin->fetch_assoc();
 
                                                         $jumlah = $result_rp4_kertas['total'] + $result_rp4_koin['total'];
@@ -393,10 +403,10 @@
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $jumlah_rp5_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp5) as total FROM denom_kertas");
+                                                       $jumlah_rp5_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp5) as total FROM denom_kertas INNER JOIN user on denom_kertas.id_users = user.id_user WHERE user.id_user=$_SESSION[id_user]");
                                                         $result_rp5_kertas = $jumlah_rp5_kertas->fetch_assoc();
 
-                                                        $jumlah_rp5_koin = $mysqli->query("SELECT SUM(denom_koin * rp5) as total FROM denom_koin");
+                                                        $jumlah_rp5_koin = $mysqli->query("SELECT SUM(denom_koin * rp5) as total FROM denom_koin INNER JOIN user on denom_koin.id_users = user.id_user WHERE user.id_user=$_SESSION[id_user]");
                                                         $result_rp5_koin = $jumlah_rp5_koin->fetch_assoc();
 
                                                         $jumlah = $result_rp5_kertas['total'] + $result_rp5_koin['total'];
@@ -405,10 +415,10 @@
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $jumlah_rp6_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp6) as total FROM denom_kertas");
+                                                       $jumlah_rp6_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp6) as total FROM denom_kertas INNER JOIN user on denom_kertas.id_users = user.id_user WHERE user.id_user=$_SESSION[id_user]");
                                                         $result_rp6_kertas = $jumlah_rp6_kertas->fetch_assoc();
 
-                                                        $jumlah_rp6_koin = $mysqli->query("SELECT SUM(denom_koin * rp6) as total FROM denom_koin");
+                                                        $jumlah_rp6_koin = $mysqli->query("SELECT SUM(denom_koin * rp6) as total FROM denom_koin INNER JOIN user on denom_koin.id_users = user.id_user WHERE user.id_user=$_SESSION[id_user]");
                                                         $result_rp6_koin = $jumlah_rp6_koin->fetch_assoc();
 
                                                         $jumlah = $result_rp6_kertas['total'] + $result_rp6_koin['total'];
@@ -417,10 +427,10 @@
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $jumlah_inpak_kertas = $mysqli->query("SELECT SUM(denom_kertas * inpak) as total FROM denom_kertas");
+                                                       $jumlah_inpak_kertas = $mysqli->query("SELECT SUM(denom_kertas * inpak) as total FROM denom_kertas INNER JOIN user on denom_kertas.id_users = user.id_user WHERE user.id_user=$_SESSION[id_user]");
                                                         $result_inpak_kertas = $jumlah_inpak_kertas->fetch_assoc();
 
-                                                        $jumlah_inpak_koin = $mysqli->query("SELECT SUM(denom_koin * inpak) as total FROM denom_koin");
+                                                        $jumlah_inpak_koin = $mysqli->query("SELECT SUM(denom_koin * inpak) as total FROM denom_koin INNER JOIN user on denom_koin.id_users = user.id_user WHERE user.id_user=$_SESSION[id_user]");
                                                         $result_inpak_koin = $jumlah_inpak_koin->fetch_assoc();
 
                                                         $jumlah = $result_inpak_kertas['total'] + $result_inpak_koin['total'];
@@ -429,10 +439,10 @@
                                                 </th>
                                                 <th>
                                                     <?php 
-                                                        $total_denom_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp1)+SUM(denom_kertas * rp2)+SUM(denom_kertas * rp3)+SUM(denom_kertas * rp4)+SUM(denom_kertas * rp5)+SUM(denom_kertas * rp6) AS Total FROM denom_kertas");
+                                                        $total_denom_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp1)+SUM(denom_kertas * rp2)+SUM(denom_kertas * rp3)+SUM(denom_kertas * rp4)+SUM(denom_kertas * rp5)+SUM(denom_kertas * rp6) AS Total FROM denom_kertas INNER JOIN user on denom_kertas.id_users = user.id_user WHERE user.id_user = $_SESSION[id_user]");
                                                         $result_kertas = $total_denom_kertas->fetch_assoc();
 
-                                                        $total_denom_koin = $mysqli->query("SELECT SUM(denom_koin * rp1)+SUM(denom_koin * rp2)+SUM(denom_koin * rp3)+SUM(denom_koin * rp4)+SUM(denom_koin * rp5)+SUM(denom_koin * rp6) AS Total FROM denom_koin");
+                                                        $total_denom_koin = $mysqli->query("SELECT SUM(denom_koin * rp1)+SUM(denom_koin * rp2)+SUM(denom_koin * rp3)+SUM(denom_koin * rp4)+SUM(denom_koin * rp5)+SUM(denom_koin * rp6) AS Total FROM denom_koin INNER JOIN user on denom_koin.id_users = user.id_user WHERE user.id_user = $_SESSION[id_user]");
                                                         $result_koin = $total_denom_koin->fetch_assoc();
 
                                                         $jumlah = $result_kertas['Total'] + $result_koin['Total'];

@@ -52,6 +52,7 @@
                     <li class=""><a href="asmen/pengeluaran/v_index.php">Pengeluaran</a></li>
                     <li class=""><a href="asmen/users/v_index.php">Management Users</a></li>
                     <li class=""><a href="asmen/profile/v_index.php">Profile</a></li>
+                    <li><a href="logout.php">Logout</a></li>
                     <?php } ?>
                 </ul>
             </div>
