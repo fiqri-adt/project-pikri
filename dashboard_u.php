@@ -475,6 +475,32 @@
             onSuccess: function(data, textStatus, jqXHR){
                 if (data == 'success') {
                     window.location.reload();
+                    console.log(data);
+                }
+            }
+            });
+        });
+
+         $(document).ready(function(){
+            $('#denomKoin').Tabledit({
+            url: 'denom_koin_process/edit_denom_koin.php',
+            buttons: {
+                delete: {
+                    class: 'btn btn-sm btn-danger',
+                    html: '<span class="fa fa-trash"></span>',
+                    action: 'delete'
+                },
+            },
+            deleteButton: false,
+            editButton: false,
+            columns: {
+                identifier: [0, 'id'],
+                editable: [[1, 'denom_koin'], [2, 'rp1'], [3, 'rp2'], [4, 'rp3'], [5, 'rp4'], [6, 'rp5'], [7, 'rp6'], [8, 'inpak'], [9, 'total'], [10, 'created_at']]
+            },
+            hideIdentifier: false,
+            onSuccess: function(data, textStatus, jqXHR){
+                if (data == 'success') {
+                    window.location.reload();
                 }
             }
             });

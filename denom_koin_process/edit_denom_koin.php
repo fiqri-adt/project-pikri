@@ -42,6 +42,8 @@ if ($input['action'] == 'edit') {
         
       }elseif ($_SESSION['level'] == 'manager') {
           echo json_encode('success');
+      }elseif ($_SESSION['level'] == 'asmen') {
+          echo json_encode('success');
       }
     }
   }
