@@ -58,6 +58,7 @@
                     <li class=""><a href="../../dashboard_u.php">Master Data Denom</a></li>
                     <li class="active"><a href="">Pengeluaran</a></li>
                     <li class=""><a href="../users/v_index.php">Mangement Users</a></li>
+                    <li><a href="../profile/v_index.php">Porfile</a></li>
                     <?php } ?>
                 </ul>
             </div>

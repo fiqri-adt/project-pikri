@@ -66,7 +66,7 @@
                 <ul class="nav nav-sidebar">
                     <?php if($_SESSION['level']=='asmen'){?>
                     <li class=""><a href="../../dashboard_u.php">Master Data Denom</a></li>
-                    <li class=""><a href="asmen/pengeluaran/v_index.php">Pengeluaran</a></li>
+                    <li class=""><a href="../pengeluaran/v_index.php">Pengeluaran</a></li>
                     <li class=""><a href="../users/v_index.php">Management Users</a></li>
                     <li class="active"><a href="asmen/profile/v_index.php">Profile</a></li>
                     <?php } ?>
