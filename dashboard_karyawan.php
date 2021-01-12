@@ -229,7 +229,7 @@
                                         </thead>
                                         <tbody>
                                         <?php 
-                                        $results = $mysqli->query("SELECT * FROM denom_koin");
+                                        $results = $mysqli->query("SELECT * FROM denom_koin INNER JOIN user on denom_koin.id_users = user.id_user WHERE user.id_user =$_SESSION[id_user]");
                                         if ($results->num_rows > 0) {
                                             $no = 1;
                                             while ($row = $results->fetch_assoc()) {
