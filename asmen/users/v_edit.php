@@ -2,7 +2,10 @@
   session_start();
   include '../../koneksi.php';
 
-  $result = $mysqli->query("SELECT * FROM `user` WHERE `id_user` = ".$_GET['id_user']."");
+  // $result = $mysqli->query("SELECT * FROM `user` WHERE `id_user` = ".$_GET['id_user']."");
+  $result = $mysqli->query("
+    SELECT * FROM user INNER JOIN denom_kertas on user.id_user = denom_kertas.id_users INNER JOIN denom_koin on user.id_user = denom_kertas.id_users WHERE NOT user.level = 'manager' AND id_user = $_GET[id_user]
+    ");
 
   if($result->num_rows > 0){
      $data = mysqli_fetch_object($result);
@@ -66,9 +69,9 @@
           <div class="jumbotron">
             <h2 class="text-center" style="font-family: raleway sans-serif; font-weight: 600;">Dashboard Edit Denom Kertas</h2>
           </div>
-          <div class="row">
-            <div class="col-lg-12">
-                <form action="func_edit_user.php?id_user=<?=$data->id_user?>" method="POST">
+          <form action="func_edit_user.php?id_user=<?=$data->id_user?>" method="POST">
+            <div class="row">
+              <div class="col-lg-12">
                     <div class="form-group">
                       <label>Username</label>
                       <input type="text" name="user" class="form-control" value="<?= $data->user ?>">
@@ -86,12 +89,47 @@
                         <option value="karyawan">Karyawan</option>
                       </select>
                     </div>
-                    <div>
-                        <button type="submit" class="btn btn-success btn-sm">Update changes</button>
-                    </div>
-                </form>
-            </div> 
-          </div>
+                </div> 
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>RP 1</label>
+                     <input type="text" name="pass" class="form-control" value="<?= $data->rp1 ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>RP 3</label>
+                     <input type="text" name="pass" class="form-control" value="<?= $data->rp3 ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>RP 5</label>
+                     <input type="text" name="pass" class="form-control" value="<?= $data->rp5 ?>">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>RP 2</label>
+                     <input type="text" name="pass" class="form-control" value="<?= $data->rp2 ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>RP 4</label>
+                     <input type="text" name="pass" class="form-control" value="<?= $data->rp4 ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>RP 6</label>
+                     <input type="text" name="pass" class="form-control" value="<?= $data->rp6 ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>inpak</label>
+                     <input type="text" name="pass" class="form-control" value="<?= $data->inpak ?>">
+                  </div>
+                </div>
+                </div>
+              </div>
+              <div>
+                  <button type="submit" class="btn btn-success btn-sm">Update changes</button>
+              </div>
+            </form>
           </div>
           <br>
          </div>
