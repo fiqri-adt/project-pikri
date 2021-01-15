@@ -24,6 +24,8 @@ if ($input['action'] == 'edit') {
     $update_field.= "rp6='".$input['rp6']."'";
   }else if(isset($input['inpak'])) {
     $update_field.= "inpak='".$input['inpak']."'";
+  }elseif (isset($input['penerimaan'])) {
+    $update_field.= "penerimaan='".$input['penerimaan']."'";
   }else if(isset($input['created_at'])) {
     $update_field.= "created_at='".$input['created_at']."'";
   }

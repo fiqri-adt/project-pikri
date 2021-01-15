@@ -138,7 +138,7 @@
                                                 </td>
                                                 <td><?= $row['created_at'] ?></td>
                                                 <td>
-                                                    <a class="btn btn-sm btn-danger" href="denom_kertas_process/process_delete_kertas.php?id_denom_kertas=<?= $row['id_denom_kertas']?>">Delete</a>
+                                                    <a class="btn btn-sm btn-danger" href="denom_kertas_process/process_delete_kertas.php?id_denom_kertas=<?= $row['id_denom_kertas']?>" onclick="return confirm(`Yakin Delete?`)">Delete</a>
                                                 </td>
                                             </tr>
                                             <?php 
@@ -147,10 +147,24 @@
                                         ?>
                                         </tbody>
 
+                                        <!-- Selisih -->
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th>Selisih</th>
+                                            </tr>
+                                        </tfoot>
+
+
+                                        <!-- Total -->
                                         <tfoot>
                                             <tr>
                                                 <th></th>
                                                 <th>Total</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
                                             </tr>
                                         </tfoot>
 
@@ -216,6 +230,14 @@
                                                         print_r($result_kertas['Total']);
                                                         ?>
                                                 </th>
+                                            </tr>
+                                        </tfoot>
+
+                                        <!-- Penerimaan -->
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th>Penerimaan</th>
                                             </tr>
                                         </tfoot>
                                     </table>

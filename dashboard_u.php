@@ -94,6 +94,7 @@
                                                 <th>RP5</th>
                                                 <th>RP6</th>
                                                 <th>Inpak</th>
+                                                <th>Penerimaan</th>
                                                 <th>Total</th>
                                                 <th>Tanggal</th>
                                             </tr>
@@ -115,6 +116,7 @@
                                                 <td><?= $row['rp5'] ?></td>
                                                 <td><?= $row['rp6'] ?></td>
                                                 <td><?= $row['inpak'] ?></td>
+                                                <td><?= $row['penerimaan'] ?></td>
                                                 <td>
                                                 <?php
                                                 $total_satu_baris = $mysqli->query("SELECT SUM(rp1)+SUM(rp2)+SUM(rp3)+SUM(rp4)+SUM(rp5)+SUM(rp6) as Total FROM denom_kertas WHERE id_denom_kertas= '".$row['id_denom_kertas']."'");
@@ -308,6 +310,22 @@
                                                 </th>
                                             </tr>
                                         </tfoot>
+
+                                        <!-- Penerimaan -->
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th>Penerimaan</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                                 <div class="tab-pane table-responsive" id="2a">
@@ -470,7 +488,7 @@
             editButton: false,
             columns: {
                 identifier: [0, 'id'],
-                editable: [[1, 'denom_kertas'], [2, 'rp1'], [3, 'rp2'], [4, 'rp3'], [5, 'rp4'], [6, 'rp5'], [7, 'rp6'], [8, 'inpak'], [9, 'total'], [10, 'created_at']]
+                editable: [[1, 'denom_kertas'], [2, 'rp1'], [3, 'rp2'], [4, 'rp3'], [5, 'rp4'], [6, 'rp5'], [7, 'rp6'], [8, 'inpak'], [9, 'penerimaan'], [10, 'total'], [11, 'created_at']]
             },
             hideIdentifier: false,
             onSuccess: function(data, textStatus, jqXHR){
