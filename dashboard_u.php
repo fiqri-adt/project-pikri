@@ -138,30 +138,6 @@
                                             <tr>
                                                 <th></th>
                                                 <th>Selisih</th>
-                                                <?php 
-                                                $penerimaan = $mysqli->query("SELECT penerimaan FROM denom_kertas"); 
-                                                if ($penerimaan->num_rows > 0) {
-                                                    while ($row = $penerimaan->fetch_assoc()) {
-                                    
-                                                ?>
-                                                <th>
-                                                    <?php 
-                                                        $jumlah_rp1_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp1) as total FROM denom_kertas");
-                                                        $result_rp1_kertas = $jumlah_rp1_kertas->fetch_assoc();
-
-                                                        $jumlah_rp1_koin = $mysqli->query("SELECT SUM(denom_koin * rp1) as total FROM denom_koin");
-                                                        $result_rp1_koin = $jumlah_rp1_koin->fetch_assoc();
-
-                                                        $jumlah = $result_rp1_kertas['total'] + $result_rp1_koin['total'];
-                                                        
-                                                        $selisih = $jumlah - $row['penerimaan'];
-                                                        echo $selisih; 
-                                                     ?>
-                                                </th>
-                                                <?php 
-                                                    }
-                                                } 
-                                                ?>    
                                             </tr>
                                         </tfoot>
 
@@ -219,6 +195,7 @@
                                                         print_r($resultInpakKertas['Inpak']);
                                                         ?> 
                                                 </th>
+                                                <th></th>
                                                 <th>
                                                     <?php 
                                                         $total_denom_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp1)+SUM(denom_kertas * rp2)+SUM(denom_kertas * rp3)+SUM(denom_kertas * rp4)+SUM(denom_kertas * rp5)+SUM(denom_kertas * rp6) AS Total FROM denom_kertas");
@@ -319,6 +296,7 @@
                                                         echo $jumlah;
                                                     ?>
                                                 </th>
+                                                <th></th>
                                                 <th>
                                                     <?php 
                                                         $total_denom_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp1)+SUM(denom_kertas * rp2)+SUM(denom_kertas * rp3)+SUM(denom_kertas * rp4)+SUM(denom_kertas * rp5)+SUM(denom_kertas * rp6) AS Total FROM denom_kertas");
@@ -339,16 +317,6 @@
                                             <tr>
                                                 <th></th>
                                                 <th>Penerimaan</th>
-                                                <?php $penerimaan = $mysqli->query("SELECT penerimaan FROM denom_kertas"); 
-                                                if ($penerimaan->num_rows > 0) {
-                                                    while ($row = $penerimaan->fetch_assoc()) {
-   
-                                                ?>                                                
-                                                <th><?= $row['penerimaan'] ?></th>
-                                                <?php 
-                                                    }
-                                                }
-                                                ?>
                                             </tr>
                                         </tfoot>
                                     </table>
