@@ -59,6 +59,7 @@
                     <li class="active"><a href="">Pengeluaran</a></li>
                     <li class=""><a href="../users/v_index.php">Mangement Users</a></li>
                     <li><a href="../profile/v_index.php">Porfile</a></li>
+                    <li><a href="../../logout.php">Logout</a></li>
                     <?php } ?>
                 </ul>
             </div>
