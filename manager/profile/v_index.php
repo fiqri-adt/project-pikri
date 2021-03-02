@@ -2,6 +2,16 @@
     include '../../koneksi.php';  // include = menambahkan/mengikutkan file, setting koneksi ke database
     session_start();
     if($_SESSION['login'] !== 'login') header('Location: login.php');
+
+    $result = $mysqli->query("SELECT * FROM `user` WHERE `id_user` = ".$_SESSION['id_user']."");
+
+    if($result->num_rows > 0){
+       $data = mysqli_fetch_object($result);
+    }else{
+       echo "data tidak tersedia";
+       die();
+    }
+
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +55,7 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><?php echo "Hello, ".ucwords($_SESSION['user']);?></a></li>
-                    <li><a href="logout.php">Logout</a></li>
+                    <li><a href="../../logout.php">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -54,57 +64,30 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <?php if($_SESSION['level']=='asmen'){?>
-                    <li class=""><a href="../../dashboard_u.php">Master Data Denom</a></li>
-                    <li class="active"><a href="">Pengeluaran</a></li>
-                    <li class=""><a href="../users/v_index.php">Mangement Users</a></li>
-                    <li><a href="../profile/v_index.php">Porfile</a></li>
+                    <?php if($_SESSION['level']=='manager'){?>
+                    <li><a href="../../dashboard_manager.php">Dashboard Manager</a></li>
+                    <li class="active"><a href="v_index.php">Profile</a></li>
                     <li><a href="../../logout.php">Logout</a></li>
                     <?php } ?>
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h2 class="page-header">Dashboard <?php echo ucfirst($_SESSION['level']);?></h2>
+                <h2 class="page-header">Dashboard Profile <?= ucfirst($_SESSION['level']) ?></h2>
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="jumbotron">
-                            <h2 class="text-center">Dashboard Pengeluaran</h2>
-                        </div>
-                        <table id="denomKertas" class="table table-bordered table-striped dataTable">
-                            <thead>
-                                <tr role="row">
-                                    <th>NO</th>
-                                    <th>Denom Kertas</th>
-                                    <th>RP1</th>
-                                    <th>RP2</th>
-                                    <th>RP3</th>
-                                    <th>RP4</th>
-                                    <th>RP5</th>
-                                    <th>RP6</th>
-                                    <th>Inpak</th>
-                                    <th>Total</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                            <tfoot>
-                                <tr role="row">
-                                    <th></th>
-                                    <th>Pengeluran</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </tfoot>
-                        </table>
+                    <form action="func_edit_profile.php?id_user=<?= $_SESSION['id_user'] ?>" method="POST">
+                      <div class="form-group">
+                        <label>Username</label>
+                        <input class="form-control" type="text" name="user" value="<?= $data->user ?>">
+                      </div>
+                      <div class="form-group">
+                        <label>Password</label>
+                        <input class="form-control" type="password" name="pass" value="<?= $data->pass ?>">
+                      </div>
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-sm btn-success">Update Profile</button>
+                      </div>
+                    </form>
                     </div>
                 </div>
                 <br>
@@ -112,6 +95,7 @@
         </div>
     </div>
     </div>
+
     <!-- Modal Add -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -123,44 +107,26 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="denom_kertas_process/process_denom_kertas.php" method="POST">
+                    <form action="func_add_user.php" method="POST">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Denom</label>
-                                    <input type="number" name="denom_kertas" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Rp1</label>
-                                    <input type="number" name="rp1" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Rp3</label>
-                                    <input type="number" name="rp3" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Rp5</label>
-                                    <input type="number" name="rp5" class="form-control">
-                                </div>
+                          <div class="col-lg-12">
+                            <div class="form-group">
+                              <label>Username</label>
+                              <input type="text" name="user" class="form-control">
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Inpak</label>
-                                    <input type="number" name="inpak" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Rp2</label>
-                                    <input type="number" name="rp2" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Rp4</label>
-                                    <input type="number" name="rp4" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Rp6</label>
-                                    <input type="number" name="rp6" class="form-control">
-                                </div>
+                            <div class="form-group">
+                              <label>Password</label>
+                              <input type="text" name="pass" class="form-control">
                             </div>
+                            <div class="form-group">
+                              <label>Level</label>
+                              <select name="level" class="form-control">
+                                <option value="manager">Manager</option>
+                                <option value="asmen">Asmen</option>
+                                <option value="karyawan">Karyawan</option>
+                              </select>
+                            </div>
+                          </div>
                         </div>
                         <div>
                             <button type="submit" class="btn btn-primary">Save changes</button>
@@ -186,30 +152,5 @@
     <script src="../../js/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-    <!-- page script -->
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('table').DataTable();
-            $('#denomKoin').DataTable();
-        });
-         $('#myTab').on('click', function(e) {
-             e.preventDefault();
-             if (isValid()) {
-                alert('bener valid')
-               $(this).tab('show');
-             }
-           });
-        
-           function isValid() {
-             const text = $("#homeText").val();
-             console.log(text)
-             if (text.length === 0) {
-                alert('false')
-               return false;
-             }
-              alert('true')
-             return true;
-           }
-   </script>
 </body>
 </html>

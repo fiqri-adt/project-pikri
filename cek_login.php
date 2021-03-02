@@ -11,6 +11,7 @@
 	if($result->num_rows > 0){
 		// echo "User ada";
 		while($row = $result->fetch_assoc()) {
+			$_SESSION['id_user'] = $row['id_user']; 
 			$_SESSION['user'] = $row['user']; 
 			$_SESSION['pass'] = $row['pass'];
 			$_SESSION['level'] = $row['level'];
@@ -20,6 +21,8 @@
 			header('Location: dashboard_karyawan.php');
 		}elseif($_SESSION['level'] == 'asmen'){
 			header('Location: dashboard_u.php');
+		}elseif ($_SESSION['level'] == 'manager') {
+			header('Location: dashboard_manager.php');
 		}
 	}else{
 		// echo "User tidak ada";

@@ -10,10 +10,17 @@
 	}
 	else{
 		// print_r($_GET); die();
-		echo "<script>
-       alert('Data berhasil di hapus');
-       window.location.href='../denom_kertas.php';
-       </script>";
+		if ($_SESSION['level'] == 'manager') {
+			echo "<script>
+	       alert('Data berhasil di hapus');
+	       window.location.href='../dashboard_manager.php';
+	       </script>";
+		}else if ($_SESSION['level'] == 'karyawan') {
+			echo "<script>
+	       alert('Data berhasil di hapus');
+	       window.location.href='../dashboard_karyawan.php';
+	       </script>";
+		}
 	}
 
 ?>

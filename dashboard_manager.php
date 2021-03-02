@@ -1,7 +1,7 @@
 <?php 
+    include 'koneksi.php';   // include = menambahkan/mengikutkan file, setting koneksi ke database
     session_start();
-    if($_SESSION['login']!='login') header('Location: login.php');
-    include 'koneksi.php'; 	// include = menambahkan/mengikutkan file, setting koneksi ke database
+    if($_SESSION['login'] !== 'login') header('Location: login.php');
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +40,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Genta ESP Admin</a>
+                <a class="navbar-brand" href="#">Karyawan</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -54,66 +54,24 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li class="active"><a href="#">User <span class="sr-only">(current)</span></a></li>
-                    <li><a href="pegawai.php">Pegawai</a></li>
-                    <li><a href="divisi.php">Divisi</a></li>
+                    <?php if($_SESSION['level']=='manager'){?>
+                    <li class="active"><a href="">Dashboard Manager</a></li>
+                    <li><a href="manager/profile/v_index.php">Profile</a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                    <?php } ?>
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h1 class="page-header">Dashboard Admin</h1>
-                <div>	
-                    <a type="button" class="btn btn-primary" href="tambah_user.php">Tambah User</a>
+                <h2 class="page-header">Dashboard <?php echo ucfirst($_SESSION['level']);?></h2>
+                <div class="row">
+                    <div class="col-lg-12">
+                    </div>
                 </div>
                 <br>
-                <div class="table-responsive">
-                    <table id="user" class="table table-bordered table-striped dataTable" aria-describedby="example1_info">
-                        <thead>
-                            <tr role="row">
-                                <th>No</th>
-                                <th>Username</th>
-                                <th>Password</th>
-                                <th>Level</th>
-                                <th>Pilihan</th>
-                            </tr>
-                        </thead>
-                        <tbody role="alert" aria-live="polite" aria-relevant="all">
-                        <?php 
-                        $result = $mysqli->query("SELECT * FROM user"); 
-                        if($result->num_rows > 0){
-                        	// echo "User ada";
-                        	$no = 1;
-                        	while($row = $result->fetch_assoc()) {
-                            ?>
-                            <tr class="odd">
-                                <td class=" "><?php echo $no++; ?></td>
-                                <td class=" "><?php echo $row['user']; ?></td>
-                                <td class=" "><?php echo $row['pass']; ?></td>
-                                <td class=" "><?php echo ucfirst($row['level']); ?></td>
-                                <td class=" ">
-                                    <a type="button" class="btn btn-warning btn-xs" href="update_user.php?id=<?php echo $row['id_user'];?>">Update</a>
-                                    <a type="button" class="btn btn-danger btn-xs" href="delete_user.php?id=<?php echo $row['id_user'];?>" onClick="return confirm('Menghapus data user <?php echo $row['user'];?> ?');">Delete</a>
-                                </td>
-                            </tr>
-                            <?php
-                            }
-                        }
-                        ?>
-                        </tbody>
-                        <tfoot>
-                            <tr role="row">
-                                <th>No</th>
-                                <th>Username</th>
-                                <th>Password</th>
-                                <th>Level</th>
-                                <th>Pilihan</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
             </div>
         </div>
     </div>
-    </div>
+
     <!-- Bootstrap core JavaScript
         ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -127,11 +85,5 @@
     <script src="js/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-    <!-- page script -->
-    <script type="text/javascript">
-        $(document).ready(function() {
-              $('#user').DataTable();
-          });
-    </script>
 </body>
 </html>
